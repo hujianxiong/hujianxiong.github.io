@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="docker," />
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="@HJX - SRE">
-<meta property="og:type" content="website">
-<meta property="og:title" content="@HJX - SRE">
-<meta property="og:url" content="http://www.hujianxiong.com/archives/index.html">
+<meta name="description" content="服务通过Docker Swarm部署后，如果在开发机本地执行类似如下命令：    docker -H tcp://swarm.alibaba.net:8443 exec -it $containerId /bin/bash如果开发机本地Docker版本高于服务器上的版本（这是很容易发生的，稍微Geek的同学是无法容忍本地软件不是最新这一事实的！），就会得到类似如下错误：服务通过Docker Sw">
+<meta name="keywords" content="docker">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用dvm解决Docker的Daemon和Client版本不一致问题">
+<meta property="og:url" content="http://www.hujianxiong.com/2016/12/06/dvm-docker-client-api/index.html">
 <meta property="og:site_name" content="@HJX - SRE">
-<meta property="og:description" content="@HJX - SRE">
+<meta property="og:description" content="服务通过Docker Swarm部署后，如果在开发机本地执行类似如下命令：    docker -H tcp://swarm.alibaba.net:8443 exec -it $containerId /bin/bash如果开发机本地Docker版本高于服务器上的版本（这是很容易发生的，稍微Geek的同学是无法容忍本地软件不是最新这一事实的！），就会得到类似如下错误：服务通过Docker Sw">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-24T17:25:03.689Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="@HJX - SRE">
-<meta name="twitter:description" content="@HJX - SRE">
+<meta name="twitter:title" content="使用dvm解决Docker的Daemon和Client版本不一致问题">
+<meta name="twitter:description" content="服务通过Docker Swarm部署后，如果在开发机本地执行类似如下命令：    docker -H tcp://swarm.alibaba.net:8443 exec -it $containerId /bin/bash如果开发机本地Docker版本高于服务器上的版本（这是很容易发生的，稍微Geek的同学是无法容忍本地软件不是最新这一事实的！），就会得到类似如下错误：服务通过Docker Sw">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://www.hujianxiong.com/archives/"/>
+  <link rel="canonical" href="http://www.hujianxiong.com/2016/12/06/dvm-docker-client-api/"/>
 
 
 
 
 
-  <title>归档 | @HJX - SRE</title>
+  <title>使用dvm解决Docker的Daemon和Client版本不一致问题 | @HJX - SRE</title>
   
 
 
@@ -153,7 +155,7 @@
     
   
 
-  <div class="container sidebar-position-right page-archive">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -257,343 +259,205 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.hujianxiong.com/2016/12/06/dvm-docker-client-api/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hujianxiong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="@HJX - SRE">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">使用dvm解决Docker的Daemon和Client版本不一致问题</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-06T14:45:33+08:00">
+                2016-12-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 8 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/26/install-kubernetes-v1.9.2/" itemprop="url">
-              
-                <span itemprop="name">部署高可用kubernetes集群-1.9.2</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-26T15:45:33+08:00"
-              content="2018-03-26" >
-          03-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/03/prometheus-Grafana-docker-swarm-mode/" itemprop="url">
-              
-                <span itemprop="name">基于Prometheus+Grafana监控Swarm Mode/MySQL</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-03T14:45:33+08:00"
-              content="2017-08-03" >
-          08-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/21/install-docker-swarm-calico/" itemprop="url">
-              
-                <span itemprop="name">Docker Swarm Calico Etcd Haproxy</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-21T18:45:33+08:00"
-              content="2017-03-21" >
-          03-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
+            
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2016">2016</h1>
-          </div>
-        
-        
 
-        
+          
+          
+             <span id="/2016/12/06/dvm-docker-client-api/" class="leancloud_visitors" data-flag-title="使用dvm解决Docker的Daemon和Client版本不一致问题">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/12/06/dvm-docker-client-api/" itemprop="url">
-              
-                <span itemprop="name">使用dvm解决Docker的Daemon和Client版本不一致问题</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-12-06T14:45:33+08:00"
-              content="2016-12-06" >
-          12-06
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/07/docker-monitor(cadvisor+influxdb+grafana)/" itemprop="url">
-              
-                <span itemprop="name">Docker监控(Cadvisor+Influxdb+Grafana)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-07T10:09:33+08:00"
-              content="2016-09-07" >
-          09-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/06/graylog2-docker-logs/" itemprop="url">
-              
-                <span itemprop="name">使用Graylog2收集Docker日志</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-06T17:45:33+08:00"
-              content="2016-09-06" >
-          09-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <blockquote>
+<p>服务通过Docker Swarm部署后，如果在开发机本地执行类似如下命令：<br>    docker -H tcp://swarm.alibaba.net:8443 exec -it $containerId /bin/bash<br>如果开发机本地Docker版本高于服务器上的版本（这是很容易发生的，稍微Geek的同学是无法容忍本地软件不是最新这一事实的！），就会得到类似如下错误：<br>服务通过Docker Swarm部署后，如果在开发机本地执行类似如下命令：</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker -H tcp://swarm.alibaba.net:8443 exec -it $containerId /bin/bash</span><br></pre></td></tr></table></figure>
+<a id="more"></a>
+<p>如果开发机本地Docker版本高于服务器上的版本（这是很容易发生的，稍微Geek的同学是无法容忍本地软件不是最新这一事实的！），就会得到类似如下错误：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error response from daemon: client is newer than server (client API version: 1.24, server API version: 1.21)</span><br></pre></td></tr></table></figure>
+<p>怎么办？</p>
+<p>你无法要求服务器为此而升级，也无法容忍为此降级本地或者申请一台和服务器的Docker相同版本的ECS——如果你不是这样想的，我很遗憾。</p>
+<p>最合理的办法是本地安装多版本，并且可以随意切换。</p>
+<p>首先给出本地当前版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$ docker version</span><br><span class="line">Client:</span><br><span class="line">Version:      1.12.1</span><br><span class="line">API version:  1.24</span><br><span class="line">Go version:   go1.7.1</span><br><span class="line">Git commit:   6f9534c</span><br><span class="line">Built:        Thu Sep 15 11:20:26 2016</span><br><span class="line">OS/Arch:      darwin/amd64</span><br><span class="line">Experimental: true</span><br></pre></td></tr></table></figure>
+<p>安装dvm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -sL https://download.getcarina.com/dvm/latest/install.sh | sh</span><br><span class="line">source /Users/erichan/.dvm/dvm.sh</span><br></pre></td></tr></table></figure>
+<p>安装和服务器相同版本的Docker，并且换过去</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">$ dvm install 1.9.0</span><br><span class="line"></span><br><span class="line">$ dvm use 1.9.0                                                                                                                            </span><br><span class="line">Now using Docker 1.9.0</span><br><span class="line"></span><br><span class="line">$ dvm ls                                                                                                                                   </span><br><span class="line">-&gt;  1.9.0</span><br><span class="line">system (1.12.1)</span><br></pre></td></tr></table></figure>
+<p>再来看本地当前版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">lient:</span><br><span class="line">Version:      1.9.0</span><br><span class="line">API version:  1.21</span><br><span class="line">Go version:   go1.4.3</span><br><span class="line">Git commit:   76d6bc9</span><br><span class="line">Built:        Tue Nov  3 19:20:09 UTC 2015</span><br><span class="line">OS/Arch:      darwin/amd64</span><br></pre></td></tr></table></figure>
+<p>最后执行最初的命令。祝好！</p>
+<blockquote>
+<p><a href="https://yq.aliyun.com/articles/61906?spm=5176.100239.topwz.1.Yd996m" target="_blank" rel="noopener">https://yq.aliyun.com/articles/61906?spm=5176.100239.topwz.1.Yd996m</a></p>
+</blockquote>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/06/installl-docker-compose/" itemprop="url">
-              
-                <span itemprop="name">Linux安装docker-compose</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-06T09:45:33+08:00"
-              content="2016-09-06" >
-          09-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/02/install-docker-swarm-cluster/" itemprop="url">
-              
-                <span itemprop="name">Docker Swarm 集群搭建</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-02T23:09:33+08:00"
-              content="2016-09-02" >
-          09-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/07/docker-monitor(cadvisor+influxdb+grafana)/" rel="next" title="Docker监控(Cadvisor+Influxdb+Grafana)">
+                <i class="fa fa-chevron-left"></i> Docker监控(Cadvisor+Influxdb+Grafana)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/03/21/install-docker-swarm-calico/" rel="prev" title="Docker Swarm Calico Etcd Haproxy">
+                Docker Swarm Calico Etcd Haproxy <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -601,6 +465,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -835,6 +703,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="docker,grafana,prometheus,swarm mode," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="安装Prometheus服务端1.创建数据目录mkdir -p /yschome/data/prometheus/etc /yschome/data/prometheus/data 2.创建配置文件">
+<meta name="keywords" content="docker,grafana,prometheus,swarm mode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于Prometheus+Grafana监控Swarm Mode&#x2F;MySQL">
+<meta property="og:url" content="http://www.hujianxiong.com/2017/08/03/prometheus-Grafana-docker-swarm-mode/index.html">
+<meta property="og:site_name" content="@HJX - SRE">
+<meta property="og:description" content="安装Prometheus服务端1.创建数据目录mkdir -p /yschome/data/prometheus/etc /yschome/data/prometheus/data 2.创建配置文件">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://www.hujianxiong.com/uploads/prometheus-Grafana-docker-swarm-mode/datasource.png">
+<meta property="og:image" content="http://www.hujianxiong.com/uploads/prometheus-Grafana-docker-swarm-mode/mysql.png">
+<meta property="og:image" content="http://www.hujianxiong.com/uploads/prometheus-Grafana-docker-swarm-mode/swarm_mode.png">
+<meta property="og:image" content="http://www.hujianxiong.com/uploads/prometheus-Grafana-docker-swarm-mode/node-1.png">
+<meta property="og:image" content="http://www.hujianxiong.com/uploads/prometheus-Grafana-docker-swarm-mode/node-2.png">
+<meta property="og:updated_time" content="2018-05-24T17:22:41.074Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于Prometheus+Grafana监控Swarm Mode&#x2F;MySQL">
+<meta name="twitter:description" content="安装Prometheus服务端1.创建数据目录mkdir -p /yschome/data/prometheus/etc /yschome/data/prometheus/data 2.创建配置文件">
+<meta name="twitter:image" content="http://www.hujianxiong.com/uploads/prometheus-Grafana-docker-swarm-mode/datasource.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.hujianxiong.com/2017/08/03/prometheus-Grafana-docker-swarm-mode/"/>
+
+
+
+
+
+  <title>基于Prometheus+Grafana监控Swarm Mode/MySQL | @HJX - SRE</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?71629d38a51185e702fe6025a5128320";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">@HJX - SRE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.hujianxiong.com/2017/08/03/prometheus-Grafana-docker-swarm-mode/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hujianxiong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="@HJX - SRE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于Prometheus+Grafana监控Swarm Mode/MySQL</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-03T14:45:33+08:00">
+                2017-08-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/monitor/" itemprop="url" rel="index">
+                    <span itemprop="name">monitor</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2017/08/03/prometheus-Grafana-docker-swarm-mode/" class="leancloud_visitors" data-flag-title="基于Prometheus+Grafana监控Swarm Mode/MySQL">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="安装Prometheus服务端"><a href="#安装Prometheus服务端" class="headerlink" title="安装Prometheus服务端"></a>安装Prometheus服务端</h2><h3 id="1-创建数据目录"><a href="#1-创建数据目录" class="headerlink" title="1.创建数据目录"></a>1.创建数据目录</h3><pre><code>mkdir -p /yschome/data/prometheus/etc /yschome/data/prometheus/data
+</code></pre><h3 id="2-创建配置文件"><a href="#2-创建配置文件" class="headerlink" title="2.创建配置文件"></a>2.创建配置文件</h3><a id="more"></a>
+<pre><code>cat &lt;&lt; EOF &gt; /yschome/data/prometheus/etc/prometheus.yml 
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+scrape_configs:
+  - job_name: &apos;container&apos;
+    static_configs:
+    - targets: [&apos;10.20.140.104:9090&apos;,,&apos;10.20.140.105:9090&apos;]
+      labels:
+        instance: cadvisor
+  - job_name: &apos;node&apos;
+    static_configs:
+    - targets: [&apos;10.20.140.104:9100&apos;]
+      labels:
+        instance: 10.20.140.104
+    - targets: [&apos;10.20.140.105:9100&apos;]
+      labels:
+        instance: 10.20.140.105
+  - job_name: prometheus
+    static_configs:
+    - targets: [&apos;10.20.140.103:9090&apos;]
+      labels:
+        instance: prometheus
+  - job_name: &apos;linux&apos;
+    static_configs:
+    - targets: [&apos;10.20.102.91:9100&apos;]
+      labels:
+        instance: test05_cadb
+    - targets: [&apos;10.20.102.92:9100&apos;]
+      labels:
+        instance: test05_psmsdb
+  - job_name: &apos;mysql&apos;
+    static_configs:
+    - targets: [&apos;10.20.102.91:9104&apos;]
+      labels:
+        instance: test05_cadb
+    - targets: [&apos;10.20.102.92:9104&apos;]
+      labels:
+        instance: test05_psmsdb
+EOF
+</code></pre><h3 id="3-使用docker启动服务端"><a href="#3-使用docker启动服务端" class="headerlink" title="3.使用docker启动服务端"></a>3.使用docker启动服务端</h3><blockquote>
+<p>开放9090端口,挂载前面创建的数据目录</p>
+</blockquote>
+<pre><code>docker run -d -p 9090:9090 --restart always  \
+-v /yschome/data/prometheus/etc/:/etc/prometheus/ \
+-v /yschome/data/prometheus/data/:/prometheus/ \
+-v /etc/localtime:/etc/localtime --name prometheus \
+ 10.20.145.240/devrepo/prometheus:v1.0
+</code></pre><h2 id="安装Prometheus-exporter监控端"><a href="#安装Prometheus-exporter监控端" class="headerlink" title="安装Prometheus exporter监控端"></a>安装Prometheus exporter监控端</h2><blockquote>
+<p>监控Docker Swarm Mode 集群<br> swarm mode 集群所有的宿主机都需要装2个exporter</p>
+</blockquote>
+<h3 id="1-node-exporter"><a href="#1-node-exporter" class="headerlink" title="1.node_exporter"></a>1.node_exporter</h3><pre><code>#使用docker安装node_exporter获取的数据有问题(可能是我使用了ingree网络导致数据采集了多次),所以采用二进制安装 
+cd /opt &amp;&amp; wget http://download.ys-city.com/prometheus/node_exporter-0.14.0.linux-amd64.tar.gz 
+mkdir  prometheus_exporters  
+tar -zxvf node_exporter-0.14.0.linux-amd64.tar.gz -C /opt/prometheus_exporters  --strip-components=1
+#启动 
+nohup /opt/prometheus_exporters/node_exporter &amp;
+</code></pre><h3 id="2-cadvisor"><a href="#2-cadvisor" class="headerlink" title="2.cadvisor"></a>2.cadvisor</h3><pre><code>#使用docker swarm mode global部署cadvisor
+docker service create --mode=global  --network=&quot;my-net&quot; \
+--endpoint-mode=vip  \
+--restart-condition=any   \
+-name=cadvisor  \
+--mount  type=bind,src=/,dst=/rootfs \
+--mount  type=bind,src=/var/run,dst=/var/run\
+--mount  type=bind,src=/sys,dst=/sys \
+--mount  type=bind,src=/yschome/data/docker/,dst=/rootfs \
+ 10.20.145.240/library/cadvisor:v1.0
+</code></pre><blockquote>
+<p>监控MySQL<br>在MySQL宿主机上安装2个exporter,均采用二进制安装 </p>
+</blockquote>
+<h3 id="1-node-exporter-1"><a href="#1-node-exporter-1" class="headerlink" title="1.node_exporter"></a>1.node_exporter</h3><pre><code>cd /opt &amp;&amp; wget http://download.ys-city.com/prometheus/node_exporter-0.14.0.linux-amd64.tar.gz 
+mkdir  prometheus_exporters  
+tar -zxvf node_exporter-0.14.0.linux-amd64.tar.gz -C /opt/prometheus_exporters  --strip-components=1
+#启动 
+nohup /opt/prometheus_exporters/node_exporter &amp;
+</code></pre><h3 id="2-mysqld-exporter"><a href="#2-mysqld-exporter" class="headerlink" title="2.mysqld_exporter"></a>2.mysqld_exporter</h3><pre><code>cd /opt &amp;&amp; wget http://download.ys-city.com/prometheus/mysqld_exporter-0.10.0.linux-amd64.tar.gz
+tar -zxvf mysqld_exporter-0.10.0.linux-amd64.tar.gz -C /opt/prometheus_exporters  --strip-components=1
+mkdir -p /usr/local/services/prometheus_exporters /opt/prometheus 
+#配置数据库授权账号,mysqld_exporter使用此账号收集数据库信息
+cat &lt;&lt; EOF &gt; /usr/local/services/prometheus_exporters/.my.cnf
+[client]
+user=root
+password=root
+EOF
+#启动
+nohup /opt/prometheus_exporters/mysqld_exporter -config.my-cnf=&quot;/usr/local/services/prometheus_exporters/.my.cnf&quot; &amp;
+</code></pre><p>##安装Grafana图表</p>
+<pre><code>#使用docker安装grafana
+docker run -d -p 3000:3000 --restart always --name grafana-new 10.20.145.240/library/grafana:v4.4.2
+</code></pre><h3 id="1-配置数据源"><a href="#1-配置数据源" class="headerlink" title="1.配置数据源"></a>1.配置数据源</h3><p><img src="/uploads/prometheus-Grafana-docker-swarm-mode/datasource.png" alt="datasources"></p>
+<h3 id="2-配置MySQL-dashboards"><a href="#2-配置MySQL-dashboards" class="headerlink" title="2.配置MySQL dashboards"></a>2.配置MySQL dashboards</h3><blockquote>
+<p>可以直接安装Percona插件来展示MySQL监控数据<br><a href="https://grafana.com/plugins/percona-percona-app" target="_blank" rel="noopener">https://grafana.com/plugins/percona-percona-app</a><br>也可以下载percona的dashboards自己导入所需要的面板<br><a href="https://github.com/percona/grafana-dashboards.git" target="_blank" rel="noopener">https://github.com/percona/grafana-dashboards.git</a></p>
+</blockquote>
+<p>我使用第二种方法下载我需要的面板然后导入</p>
+<h4 id="mysql-overview-json"><a href="#mysql-overview-json" class="headerlink" title="mysql_overview.json"></a><a href="/uploads/prometheus-Grafana-docker-swarm-mode/mysql_overview.json" target="_blank">mysql_overview.json</a></h4><blockquote>
+<p><img src="/uploads/prometheus-Grafana-docker-swarm-mode/mysql.png" alt="mysql overview"></p>
+</blockquote>
+<h3 id="3-配置Swarm-Mode监控面板"><a href="#3-配置Swarm-Mode监控面板" class="headerlink" title="3.配置Swarm Mode监控面板"></a>3.配置Swarm Mode监控面板</h3><h4 id="swarm-mode-json"><a href="#swarm-mode-json" class="headerlink" title="swarm_mode.json"></a><a href="/uploads/prometheus-Grafana-docker-swarm-mode/swarm_mode.json" target="_blank">swarm_mode.json</a></h4><blockquote>
+<p><img src="/uploads/prometheus-Grafana-docker-swarm-mode/swarm_mode.png" alt="swarm mode"></p>
+</blockquote>
+<h3 id="4-配置主机监控面板"><a href="#4-配置主机监控面板" class="headerlink" title="4.配置主机监控面板"></a>4.配置主机监控面板</h3><h4 id="Node-1-json"><a href="#Node-1-json" class="headerlink" title="Node-1.json"></a><a href="/uploads/prometheus-Grafana-docker-swarm-mode/node-1.json" target="_blank">Node-1.json</a></h4><blockquote>
+<p><img src="/uploads/prometheus-Grafana-docker-swarm-mode/node-1.png" alt="node-1"></p>
+</blockquote>
+<h4 id="Node-2-json"><a href="#Node-2-json" class="headerlink" title="Node-2.json"></a><a href="/uploads/prometheus-Grafana-docker-swarm-mode/node-2.json" target="_blank">Node-2.json</a></h4><blockquote>
+<p><img src="/uploads/prometheus-Grafana-docker-swarm-mode/node-2.png" alt="node-2"></p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+            <a href="/tags/grafana/" rel="tag"># grafana</a>
+          
+            <a href="/tags/prometheus/" rel="tag"># prometheus</a>
+          
+            <a href="/tags/swarm-mode/" rel="tag"># swarm mode</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/21/install-docker-swarm-calico/" rel="next" title="Docker Swarm Calico Etcd Haproxy">
+                <i class="fa fa-chevron-left"></i> Docker Swarm Calico Etcd Haproxy
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/26/install-kubernetes-v1.9.2/" rel="prev" title="部署高可用kubernetes集群-1.9.2">
+                部署高可用kubernetes集群-1.9.2 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="hujianxiong" />
+            
+              <p class="site-author-name" itemprop="name">hujianxiong</p>
+              <p class="site-description motion-element" itemprop="description">@HJX - SRE</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hujianxiong" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:halbart@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/hujx0608" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Prometheus服务端"><span class="nav-number">1.</span> <span class="nav-text">安装Prometheus服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-创建数据目录"><span class="nav-number">1.1.</span> <span class="nav-text">1.创建数据目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建配置文件"><span class="nav-number">1.2.</span> <span class="nav-text">2.创建配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-使用docker启动服务端"><span class="nav-number">1.3.</span> <span class="nav-text">3.使用docker启动服务端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Prometheus-exporter监控端"><span class="nav-number">2.</span> <span class="nav-text">安装Prometheus exporter监控端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-node-exporter"><span class="nav-number">2.1.</span> <span class="nav-text">1.node_exporter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-cadvisor"><span class="nav-number">2.2.</span> <span class="nav-text">2.cadvisor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-node-exporter-1"><span class="nav-number">2.3.</span> <span class="nav-text">1.node_exporter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-mysqld-exporter"><span class="nav-number">2.4.</span> <span class="nav-text">2.mysqld_exporter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-配置数据源"><span class="nav-number">2.5.</span> <span class="nav-text">1.配置数据源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置MySQL-dashboards"><span class="nav-number">2.6.</span> <span class="nav-text">2.配置MySQL dashboards</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql-overview-json"><span class="nav-number">2.6.1.</span> <span class="nav-text">mysql_overview.json</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-配置Swarm-Mode监控面板"><span class="nav-number">2.7.</span> <span class="nav-text">3.配置Swarm Mode监控面板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#swarm-mode-json"><span class="nav-number">2.7.1.</span> <span class="nav-text">swarm_mode.json</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-配置主机监控面板"><span class="nav-number">2.8.</span> <span class="nav-text">4.配置主机监控面板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-1-json"><span class="nav-number">2.8.1.</span> <span class="nav-text">Node-1.json</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-2-json"><span class="nav-number">2.8.2.</span> <span class="nav-text">Node-2.json</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hujianxiong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("js83pRO8OawQuepcDYGiwwxD-gzGzoHsz", "dko4cy0JgotsxagtKoucxSkh");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

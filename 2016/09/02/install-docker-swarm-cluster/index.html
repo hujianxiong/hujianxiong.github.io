@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/avicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="docker,swarm," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="环境配置 宿主机操作系统 CentOS Linux release 7.2.1511 (Core)   Docker版本 Server Version: 1.12.0   Swarm版本: Server Version: swarm/1.2.4   Consul版本: Consul v0.5.2   IP规划:  10.20.145.46 ~ 10.20.145.48    #Consul集群 1">
+<meta name="keywords" content="docker,swarm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker Swarm 集群搭建">
+<meta property="og:url" content="http://www.hujianxiong.com/2016/09/02/install-docker-swarm-cluster/index.html">
+<meta property="og:site_name" content="@HJX - SRE">
+<meta property="og:description" content="环境配置 宿主机操作系统 CentOS Linux release 7.2.1511 (Core)   Docker版本 Server Version: 1.12.0   Swarm版本: Server Version: swarm/1.2.4   Consul版本: Consul v0.5.2   IP规划:  10.20.145.46 ~ 10.20.145.48    #Consul集群 1">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-24T17:32:26.225Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Docker Swarm 集群搭建">
+<meta name="twitter:description" content="环境配置 宿主机操作系统 CentOS Linux release 7.2.1511 (Core)   Docker版本 Server Version: 1.12.0   Swarm版本: Server Version: swarm/1.2.4   Consul版本: Consul v0.5.2   IP规划:  10.20.145.46 ~ 10.20.145.48    #Consul集群 1">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.hujianxiong.com/2016/09/02/install-docker-swarm-cluster/"/>
+
+
+
+
+
+  <title>Docker Swarm 集群搭建 | @HJX - SRE</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?71629d38a51185e702fe6025a5128320";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">@HJX - SRE</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.hujianxiong.com/2016/09/02/install-docker-swarm-cluster/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hujianxiong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="@HJX - SRE">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Docker Swarm 集群搭建</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-02T23:09:33+08:00">
+                2016-09-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/swarm/" itemprop="url" rel="index">
+                    <span itemprop="name">swarm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2016/09/02/install-docker-swarm-cluster/" class="leancloud_visitors" data-flag-title="Docker Swarm 集群搭建">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><ul>
+<li>宿主机操作系统<ul>
+<li><code>CentOS Linux release 7.2.1511 (Core)</code></li>
+</ul>
+</li>
+<li>Docker版本<ul>
+<li><code>Server Version: 1.12.0</code></li>
+</ul>
+</li>
+<li>Swarm版本:<ul>
+<li><code>Server Version: swarm/1.2.4</code></li>
+</ul>
+</li>
+<li>Consul版本:<ul>
+<li><code>Consul v0.5.2</code></li>
+</ul>
+</li>
+<li><p>IP规划:</p>
+<ul>
+<li><code>10.20.145.46 ~ 10.20.145.48    #Consul集群</code></li>
+<li><code>10.20.145.49 ~ 10.20.145.50    #Swarm Manager</code></li>
+<li><code>10.20.145.51 ~ 10.20.145.63    #Swarm Agent</code></li>
+</ul>
+<a id="more"></a>
+</li>
+</ul>
+<h2 id="集群所需要的组件"><a href="#集群所需要的组件" class="headerlink" title="集群所需要的组件"></a>集群所需要的组件</h2><blockquote>
+<p>使用Shipyard Docker资源管理平台<br>参考:<a href="http://www.shipyard-project.com/docs/deploy/manual/" target="_blank" rel="noopener">http://www.shipyard-project.com/</a></p>
+</blockquote>
+<ul>
+<li>Consul  &nbsp;  主要用于服务发现以及共享配置,如创建multi-host-network</li>
+<li>RethinkDB &nbsp; key-value存储系统,用于存储Swarm集群信息</li>
+<li>Registrator  &nbsp;  服务自动注册,需在每个节点上部署</li>
+<li>Haproxy  &nbsp;  配合Registrator实现服务自动发现和自动代理</li>
+<li>Cadvisor  &nbsp;  google开源的docker容器资源监控软件</li>
+<li>InfluxDB  &nbsp;  存储Cadvisor监控数据</li>
+<li>Grafana  &nbsp;  读取InfluxDB数据,显示监控图表</li>
+</ul>
+<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><h3 id="1-测试环境关闭防火墙-Selinux"><a href="#1-测试环境关闭防火墙-Selinux" class="headerlink" title="1.测试环境关闭防火墙,Selinux"></a>1.测试环境关闭防火墙,Selinux</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@amumu ~]# systemctl stop firewalld</span><br><span class="line">[root@amumu ~]# systemctl disable firewalld</span><br><span class="line">[root@amumu ~]# sed -i &quot;s/enforcing/disabled/&quot; /etc/selinux/config</span><br><span class="line">[root@amumu ~]# sed -i &quot;s/enforcing/disabled/&quot; /etc/sysconfig/selinux</span><br></pre></td></tr></table></figure>
+<h3 id="2-Docker安装"><a href="#2-Docker安装" class="headerlink" title="2.Docker安装"></a>2.Docker安装</h3><blockquote>
+<p>配置阿里Docker YUM源<br>说明:在所有IP节点上执行</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">[root@amumu ~]# tee /etc/yum.repos.d/docker.repo &lt;&lt;-&apos;EOF&apos;</span><br><span class="line">[docker-main-repo]</span><br><span class="line">name=Docker main Repository</span><br><span class="line">baseurl=http://mirrors.aliyun.com/docker-engine/yum/repo/main/centos/7</span><br><span class="line">enabled=1</span><br><span class="line">gpgcheck=1</span><br><span class="line">gpgkey=http://mirrors.aliyun.com/docker-engine/yum/gpg</span><br><span class="line">EOF</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>安装Docker<br>说明:在所有IP节点上执行</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@amumu ~]# yum install -y docker-engine</span><br><span class="line">[root@amumu ~]# yum list installed | grep docker</span><br><span class="line">docker-engine.x86_64                  1.12.1-1.el7.centos             @docker-main-repo</span><br><span class="line">docker-engine-selinux.noarch          1.12.1-1.el7.centos             @docker-main-repo</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>配置Docker Consul节点上(10.20.145.46~10.20.145.48)<br>1.更换docker默认存储位置为/yschome/data/docker</p>
+</blockquote>
+<blockquote>
+<p>2.配置私有仓库地址为10.20.145.240</p>
+</blockquote>
+<blockquote>
+<p>3.配置加速器–registry-mirror(可选)</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@amumu ~]# sed -i &apos;s/ExecStart=\/usr\/bin\/dockerd/ExecStart=\/usr\/bin\/dockerd -g=\/yschome\/data\/docker --insecure-registry 10.20.145.240  --registry-mirror=https:\/\/kyyfenk.mirror.acs.aliyun.com/&apos; /usr/lib/systemd/system/docker.service</span><br><span class="line">[root@amumu ~]# systemctl daemon-reload</span><br><span class="line">[root@amumu ~]# systemctl start docker</span><br><span class="line">[root@amumu ~]# systemctl enable docker</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>配置Docker Swarm集群上(10.20.145.48~10.20.145.63)<br>1.更换docker默认存储位置为/yschome/data/docker</p>
+</blockquote>
+<blockquote>
+<p>2.配置私有仓库地址为10.20.145.240</p>
+</blockquote>
+<blockquote>
+<p>3.配置加速器–registry-mirror(可选)</p>
+</blockquote>
+<blockquote>
+<p>4.–cluster-advertise 配置的是本Docker Daemon实例在cluster中的地址</p>
+</blockquote>
+<blockquote>
+<p>5.–cluster-store 配置的是Cluster的分布式KV store的访问地址</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@amumu ~]# sed -i &apos;s/ExecStart=\/usr\/bin\/dockerd/ExecStart=\/usr\/bin\/dockerd -g=\/yschome\/data\/docker --insecure-registry 10.20.145.240  --registry-mirror=https:\/\/kyyfenk.mirror.acs.aliyun.com --cluster-advertise eth0:2375 --cluster-store consul:\/\/10.20.145.46:8500/&apos; /usr/lib/systemd/system/docker.service</span><br><span class="line">[root@amumu ~]# systemctl daemon-reload</span><br><span class="line">[root@amumu ~]# systemctl start docker</span><br><span class="line">[root@amumu ~]# systemctl enable docker</span><br></pre></td></tr></table></figure>
+<h3 id="3-Consul集群安装"><a href="#3-Consul集群安装" class="headerlink" title="3.Consul集群安装"></a>3.Consul集群安装</h3><blockquote>
+<p>10.20.145.46启动Consul master容器</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@amumu ~]# docker run -d \</span><br><span class="line">-p 8300:8300 \</span><br><span class="line">-p 8301:8301 \</span><br><span class="line">-p 8301:8301/udp \</span><br><span class="line">-p 8302:8302 \</span><br><span class="line">-p 8302:8302/udp \</span><br><span class="line">-p 8400:8400 \</span><br><span class="line">-p 8500:8500 \</span><br><span class="line">-p 8600:53 \</span><br><span class="line">-p 53:53/udp \</span><br><span class="line">-v /yschome/data/consul:/data \</span><br><span class="line">-h $HOSTNAME \</span><br><span class="line">--restart=always \</span><br><span class="line">--name=consul 10.20.145.240/library/consul:0.5.2 \ </span><br><span class="line">-server -bootstrap -ui-dir=/ui -dc=my-consul -advertise 10.20.145.46 -client 0.0.0.0</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>10.20.145.47启动Consule Agent容器,需增加 -join 参数</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">[root@amumu ~]# docker run -d \</span><br><span class="line">-p 8300:8300 \</span><br><span class="line">-p 8301:8301 \</span><br><span class="line">-p 8301:8301/udp \</span><br><span class="line">-p 8302:8302 \</span><br><span class="line">-p 8302:8302/udp \</span><br><span class="line">-p 8400:8400 \</span><br><span class="line">-p 8500:8500 \</span><br><span class="line">-v /yschome/data/consul:/data \</span><br><span class="line">-h $HOSTNAME \</span><br><span class="line">--restart=always \</span><br><span class="line">--name=consul 10.20.145.240/library/consul:0.5.2 \</span><br><span class="line">-server -join 10.20.145.46 -dc=my-consul -advertise 10.20.145.47 -client 0.0.0.0</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p> 10.20.145.48启动Consule Agent容器,需增加 -join 参数,并且在次节点上启动Haproxy容器做自动代理,Haproxy可在所有节点上都启动,在前端配置一个LVS可做HA,用Haproxy可实现服务不用映射主机端口即可做代理访问,这样就不用管理端口了,后续再完善,本次测试环境就单节点即可.</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[root@amumu ~]# docker run -d \</span><br><span class="line">-p 8300:8300 \</span><br><span class="line">-p 8301:8301 \</span><br><span class="line">-p 8301:8301/udp \</span><br><span class="line">-p 8302:8302 \</span><br><span class="line">-p 8302:8302/udp \</span><br><span class="line">-p 8400:8400 \</span><br><span class="line">-p 8500:8500 \</span><br><span class="line">-v /yschome/data/consul:/data \</span><br><span class="line">-h $HOSTNAME \</span><br><span class="line">--restart=always \</span><br><span class="line">--name=consul 10.20.145.240/library/consul:0.5.2 \</span><br><span class="line">-server -join 10.20.145.46  -dc=my-consul -advertise 10.20.145.48 -client 0.0.0.0</span><br><span class="line">    </span><br><span class="line">[root@amumu ~]# docker run  -d -p 80:80 --name haproxy  \</span><br><span class="line">--restart always  \</span><br><span class="line">-e HAPROXY_DOMAIN=test01.hujianxiong.com \</span><br><span class="line">-e CONSUL_CONNECT=10.20.140.20:8500 \</span><br><span class="line">10.20.145.240/library/haproxy:1.0</span><br></pre></td></tr></table></figure>
+<p><em>Consul集群配置完成,打开浏览器访问<a href="http://10.20.145.46:8500" target="_blank" rel="noopener">http://10.20.145.46:8500</a></em></p>
+<h3 id="4-Swarm集群和Shipyard-DockerUI资源管理平台安装"><a href="#4-Swarm集群和Shipyard-DockerUI资源管理平台安装" class="headerlink" title="4.Swarm集群和Shipyard DockerUI资源管理平台安装"></a>4.Swarm集群和Shipyard DockerUI资源管理平台安装</h3><blockquote>
+<p>10.20.145.49节点安装Swarm Manager,Rethinkdb,Proxy,Shipyard</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">[root@amumu ~]# docker run  -d \</span><br><span class="line">-p 8080:8080 \</span><br><span class="line">-h $HOSTNAME \</span><br><span class="line">-v /yschome/data/rethinkdb:/data \</span><br><span class="line">--restart=always \</span><br><span class="line">--name devops-rethinkdb 10.20.145.240/library/rethinkdb:latest</span><br><span class="line"></span><br><span class="line">[root@amumu ~]# docker run  -d \</span><br><span class="line">-p 2375:2375 \</span><br><span class="line">--hostname=$HOSTNAME \</span><br><span class="line">--restart=always \</span><br><span class="line">--name devops-proxy \</span><br><span class="line">-v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">-e PORT=2375 \</span><br><span class="line">10.20.145.240/library/docker-proxy:latest</span><br><span class="line"></span><br><span class="line">[root@amumu ~]# docker run  -d \</span><br><span class="line">--restart=always -p 3375:3375 \</span><br><span class="line">--name devops-swarm-manager 10.20.145.240/library/swarm:1.2.4 \</span><br><span class="line">manage  --replication \</span><br><span class="line">--addr 10.20.145.49:3375 \</span><br><span class="line">--host tcp://0.0.0.0:3375  consul://10.20.145.46:8500</span><br><span class="line"></span><br><span class="line">[root@amumu ~]# docker run  -d \</span><br><span class="line">--restart=always \</span><br><span class="line">--name devops-controller \</span><br><span class="line">--link devops-rethinkdb:rethinkdb \</span><br><span class="line">--link devops-swarm-manager:swarm \</span><br><span class="line">-p 80:8080 \</span><br><span class="line">10.20.145.240/library/shipyard:latest \</span><br><span class="line">server \</span><br><span class="line">-d tcp://swarm:3375</span><br></pre></td></tr></table></figure>
+<p><em>访问地址:</em></p>
+<p><em>Rethinkdb:<a href="http://10.20.145.49:8080/" target="_blank" rel="noopener">http://10.20.145.49:8080/</a></em></p>
+<p><em>Shipyard:<a href="http://10.20.145.49" target="_blank" rel="noopener">http://10.20.145.49</a> admin/shipyard</em></p>
+<blockquote>
+<p>10.20.145.50安装Swarm Manager</p>
+</blockquote>
+ <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">[root@amumu ~]# docker run -d \</span><br><span class="line">--restart=always -p 3375:3375 \</span><br><span class="line">--name devops-swarm-manager 10.20.145.240/library/swarm:1.2.4 \</span><br><span class="line">manage  --replication \</span><br><span class="line">--addr 10.20.145.50:3375 \</span><br><span class="line">--host tcp://0.0.0.0:3375  consul://10.20.145.46:8500</span><br><span class="line"></span><br><span class="line">[root@amumu ~]# docker run  -d \</span><br><span class="line">-p 2375:2375 \</span><br><span class="line">--hostname=$HOSTNAME \</span><br><span class="line">--restart=always \</span><br><span class="line">--name devops-proxy \</span><br><span class="line">-v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">-e PORT=2375 \</span><br><span class="line">10.20.145.240/library/docker-proxy:latest</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>配置Swarm Agent节点<br>10.20.145.51~10.20.145.63需启动Proxy,Swarm Agent,Registrator</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[root@amumu ~]# docker run -ti -d \</span><br><span class="line">-p 2375:2375 \</span><br><span class="line">--hostname=$HOSTNAME \</span><br><span class="line">--restart=always \</span><br><span class="line">--name devops-proxy \</span><br><span class="line">-v /var/run/docker.sock:/var/run/docker.sock \</span><br><span class="line">-e PORT=2375 \</span><br><span class="line">10.20.145.240/library/docker-proxy:latest</span><br><span class="line"></span><br><span class="line">[root@amumu ~]# docker run -ti -d \</span><br><span class="line">--restart=always \</span><br><span class="line">--name devops-swarm-agent \</span><br><span class="line">10.20.145.240/library/swarm:1.2.4 \</span><br><span class="line">join --addr `ifconfig eth0|grep inet|grep -v 127.0.0.1|grep -v inet6|awk &apos;&#123;print $2&#125;&apos;|tr -d &quot;addr:&quot;`:2375 consul://10.20.145.46:8500</span><br><span class="line"></span><br><span class="line">[root@amumu ~]# docker run -d \</span><br><span class="line">--restart=always \</span><br><span class="line">--name=devops-registrator \</span><br><span class="line">--net=host \</span><br><span class="line">-v /var/run/docker.sock:/tmp/docker.sock 10.20.145.240/library/registrator \</span><br><span class="line">-ip `ifconfig eth0|grep inet|grep -v 127.0.0.1|grep -v inet6|awk &apos;&#123;print $2&#125;&apos;|tr -d &quot;addr:&quot;` consul://10.20.145.46:8500</span><br></pre></td></tr></table></figure>
+<h3 id="5-Docker监控-Cadvisor-Influxdb-Grafana"><a href="#5-Docker监控-Cadvisor-Influxdb-Grafana" class="headerlink" title="5.Docker监控(Cadvisor+Influxdb+Grafana)"></a>5.Docker监控(Cadvisor+Influxdb+Grafana)</h3><blockquote>
+<p>详见:<a href="http://hujianxiong.com/docker-monitor/" target="_blank" rel="noopener">http://hujianxiong.com/docker-monitor/</a></p>
+</blockquote>
+<h3 id="6-使用Graylog2收集Docker日志"><a href="#6-使用Graylog2收集Docker日志" class="headerlink" title="6.使用Graylog2收集Docker日志"></a>6.使用Graylog2收集Docker日志</h3><blockquote>
+<p>详见:<a href="http://hujianxiong.com/graylog2-docker/" target="_blank" rel="noopener">http://hujianxiong.com/graylog2-docker/</a></p>
+</blockquote>
+<p>*集群搭建完成,本文主要用于学习所用,仅供参考.</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+            <a href="/tags/swarm/" rel="tag"># swarm</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/06/installl-docker-compose/" rel="prev" title="Linux安装docker-compose">
+                Linux安装docker-compose <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.png"
+                alt="hujianxiong" />
+            
+              <p class="site-author-name" itemprop="name">hujianxiong</p>
+              <p class="site-description motion-element" itemprop="description">@HJX - SRE</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/hujianxiong" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:halbart@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://weibo.com/hujx0608" target="_blank" title="weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i>weibo</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境配置"><span class="nav-number">1.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群所需要的组件"><span class="nav-number">2.</span> <span class="nav-text">集群所需要的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署"><span class="nav-number">3.</span> <span class="nav-text">部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-测试环境关闭防火墙-Selinux"><span class="nav-number">3.1.</span> <span class="nav-text">1.测试环境关闭防火墙,Selinux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Docker安装"><span class="nav-number">3.2.</span> <span class="nav-text">2.Docker安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Consul集群安装"><span class="nav-number">3.3.</span> <span class="nav-text">3.Consul集群安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Swarm集群和Shipyard-DockerUI资源管理平台安装"><span class="nav-number">3.4.</span> <span class="nav-text">4.Swarm集群和Shipyard DockerUI资源管理平台安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Docker监控-Cadvisor-Influxdb-Grafana"><span class="nav-number">3.5.</span> <span class="nav-text">5.Docker监控(Cadvisor+Influxdb+Grafana)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-使用Graylog2收集Docker日志"><span class="nav-number">3.6.</span> <span class="nav-text">6.使用Graylog2收集Docker日志</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2016 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hujianxiong</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("js83pRO8OawQuepcDYGiwwxD-gzGzoHsz", "dko4cy0JgotsxagtKoucxSkh");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

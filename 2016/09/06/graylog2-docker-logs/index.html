@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="docker,graylog2," />
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="@HJX - SRE">
-<meta property="og:type" content="website">
-<meta property="og:title" content="@HJX - SRE">
-<meta property="og:url" content="http://www.hujianxiong.com/archives/index.html">
+<meta name="description" content="Graylog2 是一个开源的日志存储系统,是由java语言编写的server,能够接收TCP,UDP,AMQP的协议发送的日志信息,并且基于mongodb数据库服务器快速存储,能够通过一个基于ruby编写的web管理界面,让轻松管理你的日志。  参考:http://docs.graylog.org/en/2.1/pages/installation/docker.html#requirement">
+<meta name="keywords" content="docker,graylog2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用Graylog2收集Docker日志">
+<meta property="og:url" content="http://www.hujianxiong.com/2016/09/06/graylog2-docker-logs/index.html">
 <meta property="og:site_name" content="@HJX - SRE">
-<meta property="og:description" content="@HJX - SRE">
+<meta property="og:description" content="Graylog2 是一个开源的日志存储系统,是由java语言编写的server,能够接收TCP,UDP,AMQP的协议发送的日志信息,并且基于mongodb数据库服务器快速存储,能够通过一个基于ruby编写的web管理界面,让轻松管理你的日志。  参考:http://docs.graylog.org/en/2.1/pages/installation/docker.html#requirement">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-24T17:26:53.423Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="@HJX - SRE">
-<meta name="twitter:description" content="@HJX - SRE">
+<meta name="twitter:title" content="使用Graylog2收集Docker日志">
+<meta name="twitter:description" content="Graylog2 是一个开源的日志存储系统,是由java语言编写的server,能够接收TCP,UDP,AMQP的协议发送的日志信息,并且基于mongodb数据库服务器快速存储,能够通过一个基于ruby编写的web管理界面,让轻松管理你的日志。  参考:http://docs.graylog.org/en/2.1/pages/installation/docker.html#requirement">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://www.hujianxiong.com/archives/"/>
+  <link rel="canonical" href="http://www.hujianxiong.com/2016/09/06/graylog2-docker-logs/"/>
 
 
 
 
 
-  <title>归档 | @HJX - SRE</title>
+  <title>使用Graylog2收集Docker日志 | @HJX - SRE</title>
   
 
 
@@ -153,7 +155,7 @@
     
   
 
-  <div class="container sidebar-position-right page-archive">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -257,343 +259,260 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.hujianxiong.com/2016/09/06/graylog2-docker-logs/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hujianxiong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="@HJX - SRE">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">使用Graylog2收集Docker日志</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-06T17:45:33+08:00">
+                2016-09-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 8 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
 
-      
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/logs/" itemprop="url" rel="index">
+                    <span itemprop="name">logs</span>
+                  </a>
+                </span>
 
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/26/install-kubernetes-v1.9.2/" itemprop="url">
-              
-                <span itemprop="name">部署高可用kubernetes集群-1.9.2</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-26T15:45:33+08:00"
-              content="2018-03-26" >
-          03-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/03/prometheus-Grafana-docker-swarm-mode/" itemprop="url">
-              
-                <span itemprop="name">基于Prometheus+Grafana监控Swarm Mode/MySQL</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-03T14:45:33+08:00"
-              content="2017-08-03" >
-          08-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/21/install-docker-swarm-calico/" itemprop="url">
-              
-                <span itemprop="name">Docker Swarm Calico Etcd Haproxy</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-21T18:45:33+08:00"
-              content="2017-03-21" >
-          03-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
+            
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2016">2016</h1>
-          </div>
-        
-        
 
-        
+          
+          
+             <span id="/2016/09/06/graylog2-docker-logs/" class="leancloud_visitors" data-flag-title="使用Graylog2收集Docker日志">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/12/06/dvm-docker-client-api/" itemprop="url">
-              
-                <span itemprop="name">使用dvm解决Docker的Daemon和Client版本不一致问题</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-12-06T14:45:33+08:00"
-              content="2016-12-06" >
-          12-06
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/07/docker-monitor(cadvisor+influxdb+grafana)/" itemprop="url">
-              
-                <span itemprop="name">Docker监控(Cadvisor+Influxdb+Grafana)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-07T10:09:33+08:00"
-              content="2016-09-07" >
-          09-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/06/graylog2-docker-logs/" itemprop="url">
-              
-                <span itemprop="name">使用Graylog2收集Docker日志</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-06T17:45:33+08:00"
-              content="2016-09-06" >
-          09-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>Graylog2 是一个开源的日志存储系统,是由java语言编写的server,能够接收TCP,UDP,AMQP的协议发送的日志信息,并且基于mongodb数据库服务器快速存储,能够通过一个基于ruby编写的web管理界面,让轻松管理你的日志。</p>
+<blockquote>
+<p>参考:<a href="http://docs.graylog.org/en/2.1/pages/installation/docker.html#requirements" target="_blank" rel="noopener">http://docs.graylog.org/en/2.1/pages/installation/docker.html#requirements</a></p>
+</blockquote>
+<h2 id="所需组件"><a href="#所需组件" class="headerlink" title="所需组件"></a>所需组件</h2><ol>
+<li>mongodb</li>
+<li>elasticsearch</li>
+<li>graylog2</li>
+</ol>
+<a id="more"></a>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><blockquote>
+<p>使用Docker-compose部署<br>docker-compose安装,参考:<a href="http://hujianxiong.com/linuxan-zhuang-docker-compose/" target="_blank" rel="noopener">http://hujianxiong.com/linuxan-zhuang-docker-compose/</a></p>
+</blockquote>
+<h4 id="docker-compose文件"><a href="#docker-compose文件" class="headerlink" title="docker-compose文件:"></a>docker-compose文件:</h4><pre><code>version: &apos;2&apos;
+services:
+  mongo:
+    image: &quot;mongo:3&quot;
+    restart: always
+    volumes:
+      - /yschome/data/graylog/data/mongo:/data/db
+  elasticsearch:
+    image: &quot;elasticsearch:2&quot;
+    command: &quot;elasticsearch -Des.cluster.name=&apos;graylog&apos;&quot;
+    volumes:
+       - /yschome/data/graylog/data/elasticsearch:/usr/share/elasticsearch/data
+    restart: always
+  graylog:
+    image: graylog2/server
+    volumes:
+      - /yschome/data/graylog/data/journal:/usr/share/graylog/data/journal
+      - /yschome/data/graylog/config:/usr/share/graylog/data/config
+    environment:
+      GRAYLOG_PASSWORD_SECRET: somepasswordpepper
+      GRAYLOG_ROOT_PASSWORD_SHA2: 8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918
+      #GRAYLOG_WEB_ENDPOINT_URI: http://0.0.0.0:9000/api/
+      GRAYLOG_REST_TRANSPORT_URI: http://10.20.145.65:12900
+    depends_on:
+      - mongo
+      - elasticsearch
+    links:
+      - mongo:mongo
+      - elasticsearch:elasticsearch
+    ports:
+      - &quot;9000:9000&quot;
+      - &quot;12900:12900&quot;
+      - &quot;12201/udp:12201/udp&quot;
+      - &quot;1514/udp:1514/udp&quot;
+    restart: always
+</code></pre><h2 id="下载配置文件"><a href="#下载配置文件" class="headerlink" title="下载配置文件"></a>下载配置文件</h2><pre><code>[root@amumu ~]# mkdir -p /yschome/data/graylog/config
+[root@amumu ~]# cd /yschome/data/graylog/config
+[root@amumu config]# wget https://raw.githubusercontent.com/Graylog2/graylog2-images/2.1/docker/config/graylog.conf
+[root@amumu config]# wget https://raw.githubusercontent.com/Graylog2/graylog2-images/2.1/docker/config/log4j2.xml
+</code></pre><h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><pre><code>[root@amumu ~]# docker-compose up -d
+</code></pre><h2 id="Graylog配置接收日志"><a href="#Graylog配置接收日志" class="headerlink" title="Graylog配置接收日志"></a>Graylog配置接收日志</h2><blockquote>
+<p>登录 <a href="http://10.20.145.210:9000" target="_blank" rel="noopener">http://10.20.145.210:9000</a> admin/admin<br>配置system==&gt;input==&gt;select input ===&gt;GELF UDP</p>
+</blockquote>
+<h2 id="修改Docker-daemon启动参数"><a href="#修改Docker-daemon启动参数" class="headerlink" title="修改Docker daemon启动参数"></a>修改Docker daemon启动参数</h2><blockquote>
+<p>–log-driver=gelf<br>–log-opt gelf-address=udp://10.20.145.210:12201<br>–log-opt gelf-compression-type=gzip<br>–log-opt gelf-compression-level=1<br>–log-opt tag=”test01_env”</p>
+</blockquote>
+<h4 id="重启daemon"><a href="#重启daemon" class="headerlink" title="重启daemon"></a>重启daemon</h4><pre><code>[root@amumu ~]# systemctl daemon-reload
+[root@amumu ~]# systemctl restart docker
+</code></pre><blockquote>
+<p>启动容器后在Graylog管理界面就可以看到接收的日志了</p>
+</blockquote>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/06/installl-docker-compose/" itemprop="url">
-              
-                <span itemprop="name">Linux安装docker-compose</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-06T09:45:33+08:00"
-              content="2016-09-06" >
-          09-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/02/install-docker-swarm-cluster/" itemprop="url">
-              
-                <span itemprop="name">Docker Swarm 集群搭建</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-02T23:09:33+08:00"
-              content="2016-09-02" >
-          09-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+            <a href="/tags/graylog2/" rel="tag"># graylog2</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/06/installl-docker-compose/" rel="next" title="Linux安装docker-compose">
+                <i class="fa fa-chevron-left"></i> Linux安装docker-compose
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/07/docker-monitor(cadvisor+influxdb+grafana)/" rel="prev" title="Docker监控(Cadvisor+Influxdb+Grafana)">
+                Docker监控(Cadvisor+Influxdb+Grafana) <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -601,6 +520,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -621,8 +544,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -708,6 +640,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#所需组件"><span class="nav-number">1.</span> <span class="nav-text">所需组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">2.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#docker-compose文件"><span class="nav-number">2.0.1.</span> <span class="nav-text">docker-compose文件:</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下载配置文件"><span class="nav-number">3.</span> <span class="nav-text">下载配置文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署"><span class="nav-number">4.</span> <span class="nav-text">部署</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graylog配置接收日志"><span class="nav-number">5.</span> <span class="nav-text">Graylog配置接收日志</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#修改Docker-daemon启动参数"><span class="nav-number">6.</span> <span class="nav-text">修改Docker daemon启动参数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#重启daemon"><span class="nav-number">6.0.1.</span> <span class="nav-text">重启daemon</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -835,6 +783,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 

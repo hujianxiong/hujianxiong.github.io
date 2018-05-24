@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="docker,cadvisor,influxdb,grafana," />
 
 
 
@@ -79,16 +79,18 @@
 
 
 
-<meta name="description" content="@HJX - SRE">
-<meta property="og:type" content="website">
-<meta property="og:title" content="@HJX - SRE">
-<meta property="og:url" content="http://www.hujianxiong.com/archives/index.html">
+<meta name="description" content="介绍Docker的火爆程度就不说了，随着docker的生态圈的发展，将原来部署起来很复杂的环境变得非常简单，下面将使用docker部署Cadvisor+Influxdb+Grafana来监控主机系统实时信息，比如cpu,内存等信息以及容器的实时信息. 首先介绍下几个组件的功能:  Cadvisor,谷歌公司自己用来监控他们基础设施的一款工具，这个工具厉害之处不仅能监控docker容器的实时信息，而">
+<meta name="keywords" content="docker,cadvisor,influxdb,grafana">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Docker监控(Cadvisor+Influxdb+Grafana)">
+<meta property="og:url" content="http://www.hujianxiong.com/2016/09/07/docker-monitor(cadvisor+influxdb+grafana)/index.html">
 <meta property="og:site_name" content="@HJX - SRE">
-<meta property="og:description" content="@HJX - SRE">
+<meta property="og:description" content="介绍Docker的火爆程度就不说了，随着docker的生态圈的发展，将原来部署起来很复杂的环境变得非常简单，下面将使用docker部署Cadvisor+Influxdb+Grafana来监控主机系统实时信息，比如cpu,内存等信息以及容器的实时信息. 首先介绍下几个组件的功能:  Cadvisor,谷歌公司自己用来监控他们基础设施的一款工具，这个工具厉害之处不仅能监控docker容器的实时信息，而">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-24T17:26:13.286Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="@HJX - SRE">
-<meta name="twitter:description" content="@HJX - SRE">
+<meta name="twitter:title" content="Docker监控(Cadvisor+Influxdb+Grafana)">
+<meta name="twitter:description" content="介绍Docker的火爆程度就不说了，随着docker的生态圈的发展，将原来部署起来很复杂的环境变得非常简单，下面将使用docker部署Cadvisor+Influxdb+Grafana来监控主机系统实时信息，比如cpu,内存等信息以及容器的实时信息. 首先介绍下几个组件的功能:  Cadvisor,谷歌公司自己用来监控他们基础设施的一款工具，这个工具厉害之处不仅能监控docker容器的实时信息，而">
 
 
 
@@ -118,13 +120,13 @@
 
 
 
-  <link rel="canonical" href="http://www.hujianxiong.com/archives/"/>
+  <link rel="canonical" href="http://www.hujianxiong.com/2016/09/07/docker-monitor(cadvisor+influxdb+grafana)/"/>
 
 
 
 
 
-  <title>归档 | @HJX - SRE</title>
+  <title>Docker监控(Cadvisor+Influxdb+Grafana) | @HJX - SRE</title>
   
 
 
@@ -153,7 +155,7 @@
     
   
 
-  <div class="container sidebar-position-right page-archive">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -257,343 +259,275 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      <span class="archive-page-counter">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.hujianxiong.com/2016/09/07/docker-monitor(cadvisor+influxdb+grafana)/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="hujianxiong">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="@HJX - SRE">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">Docker监控(Cadvisor+Influxdb+Grafana)</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-07T10:09:33+08:00">
+                2016-09-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 8 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/" itemprop="url" rel="index">
+                    <span itemprop="name">docker</span>
+                  </a>
+                </span>
 
-      
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/docker/monitor/" itemprop="url" rel="index">
+                    <span itemprop="name">monitor</span>
+                  </a>
+                </span>
 
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2018/03/26/install-kubernetes-v1.9.2/" itemprop="url">
-              
-                <span itemprop="name">部署高可用kubernetes集群-1.9.2</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-26T15:45:33+08:00"
-              content="2018-03-26" >
-          03-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/08/03/prometheus-Grafana-docker-swarm-mode/" itemprop="url">
-              
-                <span itemprop="name">基于Prometheus+Grafana监控Swarm Mode/MySQL</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-08-03T14:45:33+08:00"
-              content="2017-08-03" >
-          08-03
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/03/21/install-docker-swarm-calico/" itemprop="url">
-              
-                <span itemprop="name">Docker Swarm Calico Etcd Haproxy</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-03-21T18:45:33+08:00"
-              content="2017-03-21" >
-          03-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
+            
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2016">2016</h1>
-          </div>
-        
-        
 
-        
+          
+          
+             <span id="/2016/09/07/docker-monitor(cadvisor+influxdb+grafana)/" class="leancloud_visitors" data-flag-title="Docker监控(Cadvisor+Influxdb+Grafana)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/12/06/dvm-docker-client-api/" itemprop="url">
-              
-                <span itemprop="name">使用dvm解决Docker的Daemon和Client版本不一致问题</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-12-06T14:45:33+08:00"
-              content="2016-12-06" >
-          12-06
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/07/docker-monitor(cadvisor+influxdb+grafana)/" itemprop="url">
-              
-                <span itemprop="name">Docker监控(Cadvisor+Influxdb+Grafana)</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-07T10:09:33+08:00"
-              content="2016-09-07" >
-          09-07
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <h2 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h2><p>Docker的火爆程度就不说了，随着docker的生态圈的发展，将原来部署起来很复杂的环境变得非常简单，下面将使用docker部署Cadvisor+Influxdb+Grafana来监控主机系统实时信息，比如cpu,内存等信息以及容器的实时信息.</p>
+<p>首先介绍下几个组件的功能:</p>
+<ol>
+<li>Cadvisor,谷歌公司自己用来监控他们基础设施的一款工具，这个工具厉害之处不仅能监控docker容器的实时信息，而且还能将你的cadvisor这容器所在的主机的系统的实时信息！</li>
+<li>Influxdb,由于cadvisor只是能监控到实时的信息而不能保存，所以我们要使用influxdb来存储实时监控到的信息</li>
+<li>Grafana是纯 Javascript 开发的前端工具，用于访问 InfluxDB，自定义报表、显示图表等。</li>
+</ol>
+<a id="more"></a>
+<h2 id="部署Influxdb"><a href="#部署Influxdb" class="headerlink" title="部署Influxdb"></a>部署Influxdb</h2><blockquote>
+<p>参考 <a href="https://github.com/tutumcloud/influxdb" target="_blank" rel="noopener">https://github.com/tutumcloud/influxdb</a><br>本文使用0.13版本</p>
+</blockquote>
+<pre><code>[root@docker ~]# git clone https://github.com/tutumcloud/influxdb.git
+[root@docker ~]# cd ~/influxdb/0.13
+[root@docker ~]# docker build -t=&quot;influxdb:0.13&quot; .
+[root@docker ~]# docker run -d --name influxdb  \
+--restart always \
+-p 8083:8083 -p 8086:8086 \
+-e ADMIN_USER=&quot;root&quot; \
+-e INFLUXDB_INIT_PWD=&quot;root&quot; \
+-e PRE_CREATE_DB=&quot;cadvisor&quot; \
+10.20.145.240/library/influxdb:0.13
+</code></pre><blockquote>
+<p>参数说明:<br>ADMIN_USER,INFLUXDB_INIT_PWD,PRE_CREATE_DB初始化容器的时候自动创建数据库及用户和密码</p>
+</blockquote>
+<pre><code>[root@docker 0.13]# docker exec -t -i influxdb /bin/bash
+root@70b69d6ca021:/# influx
+Visit https://enterprise.influxdata.com to  register for updates, InfluxDB server management, and monitoring.
+Connected to http://localhost:8086 version 0.13.0
+InfluxDB shell version: 0.13.0
+&gt; SHOW DATABASES
+name: databases
+---------------
+name
+cadvisor
+_internal
 
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/06/graylog2-docker-logs/" itemprop="url">
-              
-                <span itemprop="name">使用Graylog2收集Docker日志</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-06T17:45:33+08:00"
-              content="2016-09-06" >
-          09-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+&gt; SHOW USERS
+user    admin
+root    true
+</code></pre><blockquote>
+<p>查看Influxdb服务 <a href="http://10.20.145.240.211:8083" target="_blank" rel="noopener">http://10.20.145.240.211:8083</a></p>
+</blockquote>
+<h2 id="部署Cadvisor"><a href="#部署Cadvisor" class="headerlink" title="部署Cadvisor"></a>部署Cadvisor</h2><blockquote>
+<p>在需要监控的节点上都启动一个cadvisor容器,参考:<a href="https://github.com/google/cadvisor" target="_blank" rel="noopener">https://github.com/google/cadvisor</a></p>
+</blockquote>
+<pre><code>[root@docker ~]# docker run -d \
+--restart=always \
+--volume=/:/rootfs:ro \
+--volume=/var/run:/var/run:rw \
+--volume=/sys:/sys:ro \
+--volume=/var/lib/docker/:/var/lib/docker:ro \
+--publish=8080:8080 \
+-h $HOSTNAME \
+--detach=true \
+--name=cadvisor google/cadvisor:latest \
+-docker_only \
+-storage_driver=influxdb \
+-storage_driver_db=cadvisor \
+-storage_driver_host=10.20.145.211:8086
+</code></pre><blockquote>
+<p>参数说明 docker_only:cadvisor容器只监控容器<br>打开节点上的8080端口就能看到当前节点的实时监控了</p>
+</blockquote>
+<h2 id="部署Grafana"><a href="#部署Grafana" class="headerlink" title="部署Grafana"></a>部署Grafana</h2><pre><code>[root@docker ~]# docker run -d \
+-p 3000:3000 \
+--restart always \
+-e INFLUXDB_HOST=10.20.145.211 \
+-e INFLUXDB_PORT=8086 \
+-e INFLUXDB_NAME=cadvisor \
+-e INFLUXDB_USER=root \
+-e INFLUXDB_PASS=root \
+--link influxdb:influxdb \
+--name grafana 10.20.145.240/library/grafana
+</code></pre><blockquote>
+<p>浏览器访问 10.20.145.211:3000,图表的配置比较麻烦,可以参考:<a href="http://play.grafana.org/" target="_blank" rel="noopener">http://play.grafana.org/</a></p>
+</blockquote>
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/06/installl-docker-compose/" itemprop="url">
-              
-                <span itemprop="name">Linux安装docker-compose</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-06T09:45:33+08:00"
-              content="2016-09-06" >
-          09-06
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2016/09/02/install-docker-swarm-cluster/" itemprop="url">
-              
-                <span itemprop="name">Docker Swarm 集群搭建</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-02T23:09:33+08:00"
-              content="2016-09-02" >
-          09-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
     </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/docker/" rel="tag"># docker</a>
+          
+            <a href="/tags/cadvisor/" rel="tag"># cadvisor</a>
+          
+            <a href="/tags/influxdb/" rel="tag"># influxdb</a>
+          
+            <a href="/tags/grafana/" rel="tag"># grafana</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/06/graylog2-docker-logs/" rel="next" title="使用Graylog2收集Docker日志">
+                <i class="fa fa-chevron-left"></i> 使用Graylog2收集Docker日志
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/06/dvm-docker-client-api/" rel="prev" title="使用dvm解决Docker的Daemon和Client版本不一致问题">
+                使用dvm解决Docker的Daemon和Client版本不一致问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -601,6 +535,10 @@
 
 
           
+
+  
+
+
 
         </div>
         
@@ -621,8 +559,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -708,6 +655,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#介绍"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署Influxdb"><span class="nav-number">2.</span> <span class="nav-text">部署Influxdb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署Cadvisor"><span class="nav-number">3.</span> <span class="nav-text">部署Cadvisor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署Grafana"><span class="nav-number">4.</span> <span class="nav-text">部署Grafana</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -835,6 +798,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
