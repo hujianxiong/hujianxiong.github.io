@@ -89,7 +89,7 @@
 <meta property="og:site_name" content="@HJX - SRE">
 <meta property="og:description" content="环境配置 宿主机操作系统 CentOS Linux release 7.2.1511 (Core)   Docker版本 Server Version: 1.12.0   Swarm版本: Server Version: swarm/1.2.4   Consul版本: Consul v0.5.2   IP规划:  10.20.145.46 ~ 10.20.145.48    #Consul集群 1">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-24T17:32:26.225Z">
+<meta property="og:updated_time" content="2018-05-25T15:04:46.631Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker Swarm 集群搭建">
 <meta name="twitter:description" content="环境配置 宿主机操作系统 CentOS Linux release 7.2.1511 (Core)   Docker版本 Server Version: 1.12.0   Swarm版本: Server Version: swarm/1.2.4   Consul版本: Consul v0.5.2   IP规划:  10.20.145.46 ~ 10.20.145.48    #Consul集群 1">
@@ -326,7 +326,7 @@
     <link itemprop="mainEntityOfPage" href="http://www.hujianxiong.com/2016/09/02/install-docker-swarm-cluster/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hujianxiong">
+      <meta itemprop="name" content="@HJX">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
@@ -581,12 +581,58 @@
     
     
 
-    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2016/09/02/install-docker-swarm-cluster/">Docker Swarm 集群搭建</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 @HJX 的个人博客">@HJX</a></p>
+  <p><span>发布时间:</span>2016年09月02日 - 23:09</p>
+  <p><span>最后更新:</span>2018年05月25日 - 23:05</p>
+  <p><span>原始链接:</span><a href="/2016/09/02/install-docker-swarm-cluster/" title="Docker Swarm 集群搭建">http://www.hujianxiong.com/2016/09/02/install-docker-swarm-cluster/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://www.hujianxiong.com/2016/09/02/install-docker-swarm-cluster/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+
+      
+    </div>
 
     
 
     
 
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束 <i class="fa fa-heart"></i> 感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
     <footer class="post-footer">
       
         <div class="post-tags">
@@ -687,9 +733,9 @@
             
               <img class="site-author-image" itemprop="image"
                 src="/images/avatar.png"
-                alt="hujianxiong" />
+                alt="@HJX" />
             
-              <p class="site-author-name" itemprop="name">hujianxiong</p>
+              <p class="site-author-name" itemprop="name">@HJX</p>
               <p class="site-description motion-element" itemprop="description">@HJX - SRE</p>
           </div>
 
@@ -784,7 +830,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境配置"><span class="nav-number">1.</span> <span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群所需要的组件"><span class="nav-number">2.</span> <span class="nav-text">集群所需要的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署"><span class="nav-number">3.</span> <span class="nav-text">部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-测试环境关闭防火墙-Selinux"><span class="nav-number">3.1.</span> <span class="nav-text">1.测试环境关闭防火墙,Selinux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Docker安装"><span class="nav-number">3.2.</span> <span class="nav-text">2.Docker安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Consul集群安装"><span class="nav-number">3.3.</span> <span class="nav-text">3.Consul集群安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Swarm集群和Shipyard-DockerUI资源管理平台安装"><span class="nav-number">3.4.</span> <span class="nav-text">4.Swarm集群和Shipyard DockerUI资源管理平台安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Docker监控-Cadvisor-Influxdb-Grafana"><span class="nav-number">3.5.</span> <span class="nav-text">5.Docker监控(Cadvisor+Influxdb+Grafana)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-使用Graylog2收集Docker日志"><span class="nav-number">3.6.</span> <span class="nav-text">6.使用Graylog2收集Docker日志</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境配置"><span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群所需要的组件"><span class="nav-text">集群所需要的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署"><span class="nav-text">部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-测试环境关闭防火墙-Selinux"><span class="nav-text">1.测试环境关闭防火墙,Selinux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Docker安装"><span class="nav-text">2.Docker安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Consul集群安装"><span class="nav-text">3.Consul集群安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Swarm集群和Shipyard-DockerUI资源管理平台安装"><span class="nav-text">4.Swarm集群和Shipyard DockerUI资源管理平台安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Docker监控-Cadvisor-Influxdb-Grafana"><span class="nav-text">5.Docker监控(Cadvisor+Influxdb+Grafana)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-使用Graylog2收集Docker日志"><span class="nav-text">6.使用Graylog2收集Docker日志</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -805,11 +851,11 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; 2016 &ndash; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; 2016 - <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">hujianxiong</span>
+  <span class="author" itemprop="copyrightHolder">@HJX</span>
 
   
 </div>
@@ -1126,6 +1172,9 @@
   
 
   
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
 
 </body>
 </html>

@@ -94,7 +94,7 @@
 <meta property="og:image" content="http://www.hujianxiong.com/uploads/prometheus-Grafana-docker-swarm-mode/swarm_mode.png">
 <meta property="og:image" content="http://www.hujianxiong.com/uploads/prometheus-Grafana-docker-swarm-mode/node-1.png">
 <meta property="og:image" content="http://www.hujianxiong.com/uploads/prometheus-Grafana-docker-swarm-mode/node-2.png">
-<meta property="og:updated_time" content="2018-05-24T17:22:41.074Z">
+<meta property="og:updated_time" content="2018-05-25T15:02:16.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于Prometheus+Grafana监控Swarm Mode&#x2F;MySQL">
 <meta name="twitter:description" content="安装Prometheus服务端1.创建数据目录mkdir -p /yschome/data/prometheus/etc /yschome/data/prometheus/data 2.创建配置文件">
@@ -332,7 +332,7 @@
     <link itemprop="mainEntityOfPage" href="http://www.hujianxiong.com/2017/08/03/prometheus-Grafana-docker-swarm-mode/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="hujianxiong">
+      <meta itemprop="name" content="@HJX">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
@@ -587,12 +587,58 @@ docker run -d -p 3000:3000 --restart always --name grafana-new 10.20.145.240/lib
     
     
 
-    
+    <div>
+      
+        
+<div class="my_post_copyright">
+  <script src="//cdn.bootcss.com/clipboard.js/1.5.10/clipboard.min.js"></script>
+
+  <!-- JS库 sweetalert 可修改路径 -->
+  <script src="https://cdn.bootcss.com/jquery/2.0.0/jquery.min.js"></script>
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+  <p><span>本文标题:</span><a href="/2017/08/03/prometheus-Grafana-docker-swarm-mode/">基于Prometheus+Grafana监控Swarm Mode/MySQL</a></p>
+  <p><span>文章作者:</span><a href="/" title="访问 @HJX 的个人博客">@HJX</a></p>
+  <p><span>发布时间:</span>2017年08月03日 - 14:08</p>
+  <p><span>最后更新:</span>2018年05月25日 - 23:05</p>
+  <p><span>原始链接:</span><a href="/2017/08/03/prometheus-Grafana-docker-swarm-mode/" title="基于Prometheus+Grafana监控Swarm Mode/MySQL">http://www.hujianxiong.com/2017/08/03/prometheus-Grafana-docker-swarm-mode/</a>
+    <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://www.hujianxiong.com/2017/08/03/prometheus-Grafana-docker-swarm-mode/"  aria-label="复制成功！"></i></span>
+  </p>
+  <p><span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" title="Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0)">署名-非商业性使用-禁止演绎 4.0 国际</a> 转载请保留原文链接及作者。</p>  
+</div>
+<script> 
+    var clipboard = new Clipboard('.fa-clipboard');
+      $(".fa-clipboard").click(function(){
+      clipboard.on('success', function(){
+        swal({   
+          title: "",   
+          text: '复制成功',
+          icon: "success", 
+          showConfirmButton: true
+          });
+        });
+    });  
+</script>
+
+
+      
+    </div>
 
     
 
     
 
+    
+
+<div>
+  
+    <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束 <i class="fa fa-heart"></i> 感谢您的阅读-------------</div>
+    
+</div>
+
+  
+</div>
     <footer class="post-footer">
       
         <div class="post-tags">
@@ -701,9 +747,9 @@ docker run -d -p 3000:3000 --restart always --name grafana-new 10.20.145.240/lib
             
               <img class="site-author-image" itemprop="image"
                 src="/images/avatar.png"
-                alt="hujianxiong" />
+                alt="@HJX" />
             
-              <p class="site-author-name" itemprop="name">hujianxiong</p>
+              <p class="site-author-name" itemprop="name">@HJX</p>
               <p class="site-description motion-element" itemprop="description">@HJX - SRE</p>
           </div>
 
@@ -798,7 +844,7 @@ docker run -d -p 3000:3000 --restart always --name grafana-new 10.20.145.240/lib
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Prometheus服务端"><span class="nav-number">1.</span> <span class="nav-text">安装Prometheus服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-创建数据目录"><span class="nav-number">1.1.</span> <span class="nav-text">1.创建数据目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建配置文件"><span class="nav-number">1.2.</span> <span class="nav-text">2.创建配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-使用docker启动服务端"><span class="nav-number">1.3.</span> <span class="nav-text">3.使用docker启动服务端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Prometheus-exporter监控端"><span class="nav-number">2.</span> <span class="nav-text">安装Prometheus exporter监控端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-node-exporter"><span class="nav-number">2.1.</span> <span class="nav-text">1.node_exporter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-cadvisor"><span class="nav-number">2.2.</span> <span class="nav-text">2.cadvisor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-node-exporter-1"><span class="nav-number">2.3.</span> <span class="nav-text">1.node_exporter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-mysqld-exporter"><span class="nav-number">2.4.</span> <span class="nav-text">2.mysqld_exporter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-配置数据源"><span class="nav-number">2.5.</span> <span class="nav-text">1.配置数据源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置MySQL-dashboards"><span class="nav-number">2.6.</span> <span class="nav-text">2.配置MySQL dashboards</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql-overview-json"><span class="nav-number">2.6.1.</span> <span class="nav-text">mysql_overview.json</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-配置Swarm-Mode监控面板"><span class="nav-number">2.7.</span> <span class="nav-text">3.配置Swarm Mode监控面板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#swarm-mode-json"><span class="nav-number">2.7.1.</span> <span class="nav-text">swarm_mode.json</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-配置主机监控面板"><span class="nav-number">2.8.</span> <span class="nav-text">4.配置主机监控面板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-1-json"><span class="nav-number">2.8.1.</span> <span class="nav-text">Node-1.json</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-2-json"><span class="nav-number">2.8.2.</span> <span class="nav-text">Node-2.json</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Prometheus服务端"><span class="nav-text">安装Prometheus服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-创建数据目录"><span class="nav-text">1.创建数据目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建配置文件"><span class="nav-text">2.创建配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-使用docker启动服务端"><span class="nav-text">3.使用docker启动服务端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Prometheus-exporter监控端"><span class="nav-text">安装Prometheus exporter监控端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-node-exporter"><span class="nav-text">1.node_exporter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-cadvisor"><span class="nav-text">2.cadvisor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-node-exporter-1"><span class="nav-text">1.node_exporter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-mysqld-exporter"><span class="nav-text">2.mysqld_exporter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-配置数据源"><span class="nav-text">1.配置数据源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置MySQL-dashboards"><span class="nav-text">2.配置MySQL dashboards</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql-overview-json"><span class="nav-text">mysql_overview.json</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-配置Swarm-Mode监控面板"><span class="nav-text">3.配置Swarm Mode监控面板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#swarm-mode-json"><span class="nav-text">swarm_mode.json</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-配置主机监控面板"><span class="nav-text">4.配置主机监控面板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-1-json"><span class="nav-text">Node-1.json</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-2-json"><span class="nav-text">Node-2.json</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -819,11 +865,11 @@ docker run -d -p 3000:3000 --restart always --name grafana-new 10.20.145.240/lib
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<div class="copyright">&copy; 2016 &ndash; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; 2016 - <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
-    <i class="fa fa-user"></i>
+    <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">hujianxiong</span>
+  <span class="author" itemprop="copyrightHolder">@HJX</span>
 
   
 </div>
@@ -1140,6 +1186,9 @@ docker run -d -p 3000:3000 --restart always --name grafana-new 10.20.145.240/lib
   
 
   
+
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/love.js"></script>
 
 </body>
 </html>
