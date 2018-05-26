@@ -2,30 +2,44 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>http://www.hujianxiong.com/2016/09/06/installl-docker-compose/</loc>
+    <loc>http://www.hujianxiong.com/2016/09/06/graylog2-docker-logs/</loc>
     
-    <lastmod>2018-05-26T15:23:36.418Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.hujianxiong.com/2017/03/21/install-docker-swarm-calico/</loc>
-    
-    <lastmod>2018-05-25T15:05:12.370Z</lastmod>
+    <lastmod>2018-05-26T16:40:08.476Z</lastmod>
     
   </url>
   
   <url>
     <loc>http://www.hujianxiong.com/2016/09/02/install-docker-swarm-cluster/</loc>
     
-    <lastmod>2018-05-25T15:04:46.631Z</lastmod>
+    <lastmod>2018-05-26T16:34:48.962Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://www.hujianxiong.com/2016/09/06/graylog2-docker-logs/</loc>
+    <loc>http://www.hujianxiong.com/2017/03/21/install-docker-swarm-calico/</loc>
     
-    <lastmod>2018-05-25T15:04:01.594Z</lastmod>
+    <lastmod>2018-05-26T16:33:31.218Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.hujianxiong.com/2017/08/03/prometheus-Grafana-docker-swarm-mode/</loc>
+    
+    <lastmod>2018-05-26T16:32:13.450Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.hujianxiong.com/2018/03/26/install-kubernetes-v1.9.2/</loc>
+    
+    <lastmod>2018-05-26T16:30:22.144Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://www.hujianxiong.com/2016/09/06/installl-docker-compose/</loc>
+    
+    <lastmod>2018-05-26T15:23:36.418Z</lastmod>
     
   </url>
   
@@ -40,20 +54,6 @@
     <loc>http://www.hujianxiong.com/2016/12/06/dvm-docker-client-api/</loc>
     
     <lastmod>2018-05-25T15:02:55.941Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.hujianxiong.com/2017/08/03/prometheus-Grafana-docker-swarm-mode/</loc>
-    
-    <lastmod>2018-05-25T15:02:16.151Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.hujianxiong.com/2018/03/26/install-kubernetes-v1.9.2/</loc>
-    
-    <lastmod>2018-05-25T15:00:15.384Z</lastmod>
     
   </url>
   

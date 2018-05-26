@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="引用 参考:http://hujianxiong.com/2016/09/02/install-docker-swarm-cluster  安装组件 Swarm 使用原生的集群方案 Etcd key/value存储集群,网络信息等 Registrator 服务注册 Calico 网络 Consul-Haproxy 自动代理后端服务 Consul Registrator注册的地方也可以使用Etcd,">
+<meta name="description" content="1.引用 参考:http://hujianxiong.com/2016/09/02/install-docker-swarm-cluster  2.安装组件 Swarm 使用原生的集群方案 Etcd key/value存储集群,网络信息等 Registrator 服务注册 Calico 网络 Consul-Haproxy 自动代理后端服务 Consul Registrator注册的地方也可以使用E">
 <meta name="keywords" content="docker,calico,haproxy,etcd">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker Swarm Calico Etcd Haproxy">
 <meta property="og:url" content="http://www.hujianxiong.com/2017/03/21/install-docker-swarm-calico/index.html">
 <meta property="og:site_name" content="@HJX - SRE">
-<meta property="og:description" content="引用 参考:http://hujianxiong.com/2016/09/02/install-docker-swarm-cluster  安装组件 Swarm 使用原生的集群方案 Etcd key/value存储集群,网络信息等 Registrator 服务注册 Calico 网络 Consul-Haproxy 自动代理后端服务 Consul Registrator注册的地方也可以使用Etcd,">
+<meta property="og:description" content="1.引用 参考:http://hujianxiong.com/2016/09/02/install-docker-swarm-cluster  2.安装组件 Swarm 使用原生的集群方案 Etcd key/value存储集群,网络信息等 Registrator 服务注册 Calico 网络 Consul-Haproxy 自动代理后端服务 Consul Registrator注册的地方也可以使用E">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-25T15:05:12.370Z">
+<meta property="og:updated_time" content="2018-05-26T16:33:31.218Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker Swarm Calico Etcd Haproxy">
-<meta name="twitter:description" content="引用 参考:http://hujianxiong.com/2016/09/02/install-docker-swarm-cluster  安装组件 Swarm 使用原生的集群方案 Etcd key/value存储集群,网络信息等 Registrator 服务注册 Calico 网络 Consul-Haproxy 自动代理后端服务 Consul Registrator注册的地方也可以使用Etcd,">
+<meta name="twitter:description" content="1.引用 参考:http://hujianxiong.com/2016/09/02/install-docker-swarm-cluster  2.安装组件 Swarm 使用原生的集群方案 Etcd key/value存储集群,网络信息等 Registrator 服务注册 Calico 网络 Consul-Haproxy 自动代理后端服务 Consul Registrator注册的地方也可以使用E">
 
 
 
@@ -429,7 +429,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,127
+                  1,132
                 </span>
               
 
@@ -466,10 +466,10 @@
       
 
       
-        <h2 id="引用"><a href="#引用" class="headerlink" title="引用"></a>引用</h2><blockquote>
+        <h2 id="1-引用"><a href="#1-引用" class="headerlink" title="1.引用"></a>1.引用</h2><blockquote>
 <p>参考:<a href="http://hujianxiong.com/2016/09/02/install-docker-swarm-cluster" target="_blank" rel="noopener">http://hujianxiong.com/2016/09/02/install-docker-swarm-cluster</a></p>
 </blockquote>
-<h2 id="安装组件"><a href="#安装组件" class="headerlink" title="安装组件"></a>安装组件</h2><ul>
+<h2 id="2-安装组件"><a href="#2-安装组件" class="headerlink" title="2.安装组件"></a>2.安装组件</h2><ul>
 <li>Swarm 使用原生的集群方案</li>
 <li>Etcd key/value存储集群,网络信息等</li>
 <li>Registrator 服务注册</li>
@@ -478,7 +478,7 @@
 <li>Consul Registrator注册的地方也可以使用Etcd,不过有现成的Consul-Haproxy模板可以使用就不替换了,使用Etcd可以替换成confd-Haproxy</li>
 </ul>
 <a id="more"></a>
-<h2 id="部署Master端"><a href="#部署Master端" class="headerlink" title="部署Master端"></a>部署Master端</h2><blockquote>
+<h2 id="3-部署Master端"><a href="#3-部署Master端" class="headerlink" title="3.部署Master端"></a>3.部署Master端</h2><blockquote>
 <p>部署服务etcd,calico,consul,consul-haproxy,docker-proxy,swarm-manager,docker-daemon</p>
 </blockquote>
 <h3 id="1-配置ENV"><a href="#1-配置ENV" class="headerlink" title="1.配置ENV"></a>1.配置ENV</h3><pre><code>ntpdate 10.20.101.251
@@ -592,7 +592,7 @@ manage  --replication \
 --addr `echo $MASTER_IP`:3375 \
 --host tcp://0.0.0.0:3375  etcd://`echo $MASTER_IP`:2379
 </code></pre><h3 id="6-创建集群网络"><a href="#6-创建集群网络" class="headerlink" title="6.创建集群网络"></a>6.创建集群网络</h3><pre><code>docker network create --driver calico --ipam-driver calico-ipam   my-net
-</code></pre><h2 id="部署Agent端"><a href="#部署Agent端" class="headerlink" title="部署Agent端"></a>部署Agent端</h2><blockquote>
+</code></pre><h2 id="4-部署Agent端"><a href="#4-部署Agent端" class="headerlink" title="4.部署Agent端"></a>4.部署Agent端</h2><blockquote>
 <p>安装组件docker-daemon,calico,docker-proxy,registrator,swarm-agent</p>
 </blockquote>
 <blockquote>
@@ -650,7 +650,7 @@ docker run -d \
 --volume=/var/run/docker.sock:/tmp/docker.sock \
 10.20.145.240/library/registrator:v1.0 \
 -internal=true consul://`echo $MASTER_IP`:8500
-</code></pre><h2 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h2><blockquote>
+</code></pre><h2 id="5-说明"><a href="#5-说明" class="headerlink" title="5.说明"></a>5.说明</h2><blockquote>
 <p>集群安装完成后,默认haproxy会配置根据配置的域名做好代理,如果不希望代理的只需在启动容器时加上 –label registrator.ignored=true 即可,这里了registrator代码做了修改</p>
 </blockquote>
 <blockquote>
@@ -675,7 +675,7 @@ docker run -d \
   <p><span>本文标题:</span><a href="/2017/03/21/install-docker-swarm-calico/">Docker Swarm Calico Etcd Haproxy</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 @HJX 的个人博客">@HJX</a></p>
   <p><span>发布时间:</span>2017年03月21日 - 18:03</p>
-  <p><span>最后更新:</span>2018年05月25日 - 23:05</p>
+  <p><span>最后更新:</span>2018年05月27日 - 00:05</p>
   <p><span>原始链接:</span><a href="/2017/03/21/install-docker-swarm-calico/" title="Docker Swarm Calico Etcd Haproxy">http://www.hujianxiong.com/2017/03/21/install-docker-swarm-calico/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://www.hujianxiong.com/2017/03/21/install-docker-swarm-calico/"  aria-label="复制成功！"></i></span>
   </p>
@@ -935,7 +935,7 @@ docker run -d \
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#引用"><span class="nav-text">引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装组件"><span class="nav-text">安装组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署Master端"><span class="nav-text">部署Master端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-配置ENV"><span class="nav-text">1.配置ENV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装Etcd"><span class="nav-text">2.安装Etcd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安装Docker-daemon"><span class="nav-text">3.安装Docker-daemon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-安装Calico"><span class="nav-text">4.安装Calico</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-启动容器组件"><span class="nav-text">5.启动容器组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-创建集群网络"><span class="nav-text">6.创建集群网络</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署Agent端"><span class="nav-text">部署Agent端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-配置ENV-1"><span class="nav-text">1.配置ENV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装Docker-daemon"><span class="nav-text">2.安装Docker-daemon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安装Calico"><span class="nav-text">3.安装Calico</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-启动容器组件"><span class="nav-text">4.启动容器组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#说明"><span class="nav-text">说明</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-引用"><span class="nav-text">1.引用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-安装组件"><span class="nav-text">2.安装组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-部署Master端"><span class="nav-text">3.部署Master端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-配置ENV"><span class="nav-text">1.配置ENV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装Etcd"><span class="nav-text">2.安装Etcd</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安装Docker-daemon"><span class="nav-text">3.安装Docker-daemon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-安装Calico"><span class="nav-text">4.安装Calico</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-启动容器组件"><span class="nav-text">5.启动容器组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-创建集群网络"><span class="nav-text">6.创建集群网络</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-部署Agent端"><span class="nav-text">4.部署Agent端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-配置ENV-1"><span class="nav-text">1.配置ENV</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-安装Docker-daemon"><span class="nav-text">2.安装Docker-daemon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-安装Calico"><span class="nav-text">3.安装Calico</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-启动容器组件"><span class="nav-text">4.启动容器组件</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-说明"><span class="nav-text">5.说明</span></a></li></ol></div>
             
 
           </div>

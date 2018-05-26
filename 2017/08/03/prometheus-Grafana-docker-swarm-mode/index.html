@@ -81,23 +81,23 @@
 
 
 
-<meta name="description" content="安装Prometheus服务端1.创建数据目录mkdir -p /yschome/data/prometheus/etc /yschome/data/prometheus/data 2.创建配置文件">
+<meta name="description" content="1.安装Prometheus服务端1.创建数据目录mkdir -p /yschome/data/prometheus/etc /yschome/data/prometheus/data 2.创建配置文件">
 <meta name="keywords" content="docker,grafana,prometheus,swarm mode">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于Prometheus+Grafana监控Swarm Mode&#x2F;MySQL">
 <meta property="og:url" content="http://www.hujianxiong.com/2017/08/03/prometheus-Grafana-docker-swarm-mode/index.html">
 <meta property="og:site_name" content="@HJX - SRE">
-<meta property="og:description" content="安装Prometheus服务端1.创建数据目录mkdir -p /yschome/data/prometheus/etc /yschome/data/prometheus/data 2.创建配置文件">
+<meta property="og:description" content="1.安装Prometheus服务端1.创建数据目录mkdir -p /yschome/data/prometheus/etc /yschome/data/prometheus/data 2.创建配置文件">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.hujianxiong.com/uploads/prometheus-Grafana-docker-swarm-mode/datasource.png">
 <meta property="og:image" content="http://www.hujianxiong.com/uploads/prometheus-Grafana-docker-swarm-mode/mysql.png">
 <meta property="og:image" content="http://www.hujianxiong.com/uploads/prometheus-Grafana-docker-swarm-mode/swarm_mode.png">
 <meta property="og:image" content="http://www.hujianxiong.com/uploads/prometheus-Grafana-docker-swarm-mode/node-1.png">
 <meta property="og:image" content="http://www.hujianxiong.com/uploads/prometheus-Grafana-docker-swarm-mode/node-2.png">
-<meta property="og:updated_time" content="2018-05-25T15:02:16.151Z">
+<meta property="og:updated_time" content="2018-05-26T16:32:13.450Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于Prometheus+Grafana监控Swarm Mode&#x2F;MySQL">
-<meta name="twitter:description" content="安装Prometheus服务端1.创建数据目录mkdir -p /yschome/data/prometheus/etc /yschome/data/prometheus/data 2.创建配置文件">
+<meta name="twitter:description" content="1.安装Prometheus服务端1.创建数据目录mkdir -p /yschome/data/prometheus/etc /yschome/data/prometheus/data 2.创建配置文件">
 <meta name="twitter:image" content="http://www.hujianxiong.com/uploads/prometheus-Grafana-docker-swarm-mode/datasource.png">
 
 
@@ -435,7 +435,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  676
+                  679
                 </span>
               
 
@@ -472,7 +472,7 @@
       
 
       
-        <h2 id="安装Prometheus服务端"><a href="#安装Prometheus服务端" class="headerlink" title="安装Prometheus服务端"></a>安装Prometheus服务端</h2><h3 id="1-创建数据目录"><a href="#1-创建数据目录" class="headerlink" title="1.创建数据目录"></a>1.创建数据目录</h3><pre><code>mkdir -p /yschome/data/prometheus/etc /yschome/data/prometheus/data
+        <h2 id="1-安装Prometheus服务端"><a href="#1-安装Prometheus服务端" class="headerlink" title="1.安装Prometheus服务端"></a>1.安装Prometheus服务端</h2><h3 id="1-创建数据目录"><a href="#1-创建数据目录" class="headerlink" title="1.创建数据目录"></a>1.创建数据目录</h3><pre><code>mkdir -p /yschome/data/prometheus/etc /yschome/data/prometheus/data
 </code></pre><h3 id="2-创建配置文件"><a href="#2-创建配置文件" class="headerlink" title="2.创建配置文件"></a>2.创建配置文件</h3><a id="more"></a>
 <pre><code>cat &lt;&lt; EOF &gt; /yschome/data/prometheus/etc/prometheus.yml 
 global:
@@ -522,7 +522,7 @@ EOF
 -v /yschome/data/prometheus/data/:/prometheus/ \
 -v /etc/localtime:/etc/localtime --name prometheus \
  10.20.145.240/devrepo/prometheus:v1.0
-</code></pre><h2 id="安装Prometheus-exporter监控端"><a href="#安装Prometheus-exporter监控端" class="headerlink" title="安装Prometheus exporter监控端"></a>安装Prometheus exporter监控端</h2><blockquote>
+</code></pre><h2 id="2-安装Prometheus-exporter监控端"><a href="#2-安装Prometheus-exporter监控端" class="headerlink" title="2.安装Prometheus exporter监控端"></a>2.安装Prometheus exporter监控端</h2><blockquote>
 <p>监控Docker Swarm Mode 集群<br> swarm mode 集群所有的宿主机都需要装2个exporter</p>
 </blockquote>
 <h3 id="1-node-exporter"><a href="#1-node-exporter" class="headerlink" title="1.node_exporter"></a>1.node_exporter</h3><pre><code>#使用docker安装node_exporter获取的数据有问题(可能是我使用了ingree网络导致数据采集了多次),所以采用二进制安装 
@@ -560,8 +560,7 @@ password=root
 EOF
 #启动
 nohup /opt/prometheus_exporters/mysqld_exporter -config.my-cnf=&quot;/usr/local/services/prometheus_exporters/.my.cnf&quot; &amp;
-</code></pre><p>##安装Grafana图表</p>
-<pre><code>#使用docker安装grafana
+</code></pre><h2 id="3-安装Grafana图表"><a href="#3-安装Grafana图表" class="headerlink" title="3.安装Grafana图表"></a>3.安装Grafana图表</h2><pre><code>#使用docker安装grafana
 docker run -d -p 3000:3000 --restart always --name grafana-new 10.20.145.240/library/grafana:v4.4.2
 </code></pre><h3 id="1-配置数据源"><a href="#1-配置数据源" class="headerlink" title="1.配置数据源"></a>1.配置数据源</h3><p><img src="/uploads/prometheus-Grafana-docker-swarm-mode/datasource.png" alt="datasources"></p>
 <h3 id="2-配置MySQL-dashboards"><a href="#2-配置MySQL-dashboards" class="headerlink" title="2.配置MySQL dashboards"></a>2.配置MySQL dashboards</h3><blockquote>
@@ -599,7 +598,7 @@ docker run -d -p 3000:3000 --restart always --name grafana-new 10.20.145.240/lib
   <p><span>本文标题:</span><a href="/2017/08/03/prometheus-Grafana-docker-swarm-mode/">基于Prometheus+Grafana监控Swarm Mode/MySQL</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 @HJX 的个人博客">@HJX</a></p>
   <p><span>发布时间:</span>2017年08月03日 - 14:08</p>
-  <p><span>最后更新:</span>2018年05月25日 - 23:05</p>
+  <p><span>最后更新:</span>2018年05月27日 - 00:05</p>
   <p><span>原始链接:</span><a href="/2017/08/03/prometheus-Grafana-docker-swarm-mode/" title="基于Prometheus+Grafana监控Swarm Mode/MySQL">http://www.hujianxiong.com/2017/08/03/prometheus-Grafana-docker-swarm-mode/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://www.hujianxiong.com/2017/08/03/prometheus-Grafana-docker-swarm-mode/"  aria-label="复制成功！"></i></span>
   </p>
@@ -859,7 +858,7 @@ docker run -d -p 3000:3000 --restart always --name grafana-new 10.20.145.240/lib
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Prometheus服务端"><span class="nav-text">安装Prometheus服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-创建数据目录"><span class="nav-text">1.创建数据目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建配置文件"><span class="nav-text">2.创建配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-使用docker启动服务端"><span class="nav-text">3.使用docker启动服务端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装Prometheus-exporter监控端"><span class="nav-text">安装Prometheus exporter监控端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-node-exporter"><span class="nav-text">1.node_exporter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-cadvisor"><span class="nav-text">2.cadvisor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-node-exporter-1"><span class="nav-text">1.node_exporter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-mysqld-exporter"><span class="nav-text">2.mysqld_exporter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-配置数据源"><span class="nav-text">1.配置数据源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置MySQL-dashboards"><span class="nav-text">2.配置MySQL dashboards</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql-overview-json"><span class="nav-text">mysql_overview.json</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-配置Swarm-Mode监控面板"><span class="nav-text">3.配置Swarm Mode监控面板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#swarm-mode-json"><span class="nav-text">swarm_mode.json</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-配置主机监控面板"><span class="nav-text">4.配置主机监控面板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-1-json"><span class="nav-text">Node-1.json</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-2-json"><span class="nav-text">Node-2.json</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-安装Prometheus服务端"><span class="nav-text">1.安装Prometheus服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-创建数据目录"><span class="nav-text">1.创建数据目录</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-创建配置文件"><span class="nav-text">2.创建配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-使用docker启动服务端"><span class="nav-text">3.使用docker启动服务端</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-安装Prometheus-exporter监控端"><span class="nav-text">2.安装Prometheus exporter监控端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-node-exporter"><span class="nav-text">1.node_exporter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-cadvisor"><span class="nav-text">2.cadvisor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-node-exporter-1"><span class="nav-text">1.node_exporter</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-mysqld-exporter"><span class="nav-text">2.mysqld_exporter</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-安装Grafana图表"><span class="nav-text">3.安装Grafana图表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-配置数据源"><span class="nav-text">1.配置数据源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-配置MySQL-dashboards"><span class="nav-text">2.配置MySQL dashboards</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#mysql-overview-json"><span class="nav-text">mysql_overview.json</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-配置Swarm-Mode监控面板"><span class="nav-text">3.配置Swarm Mode监控面板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#swarm-mode-json"><span class="nav-text">swarm_mode.json</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-配置主机监控面板"><span class="nav-text">4.配置主机监控面板</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-1-json"><span class="nav-text">Node-1.json</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Node-2-json"><span class="nav-text">Node-2.json</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>

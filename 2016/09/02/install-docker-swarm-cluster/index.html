@@ -81,18 +81,18 @@
 
 
 
-<meta name="description" content="环境配置 宿主机操作系统 CentOS Linux release 7.2.1511 (Core)   Docker版本 Server Version: 1.12.0   Swarm版本: Server Version: swarm/1.2.4   Consul版本: Consul v0.5.2   IP规划:  10.20.145.46 ~ 10.20.145.48    #Consul集群 1">
+<meta name="description" content="1.环境配置 宿主机操作系统 CentOS Linux release 7.2.1511 (Core)   Docker版本 Server Version: 1.12.0   Swarm版本: Server Version: swarm/1.2.4   Consul版本: Consul v0.5.2   IP规划:  10.20.145.46 ~ 10.20.145.48    #Consul集群">
 <meta name="keywords" content="docker,swarm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker Swarm 集群搭建">
 <meta property="og:url" content="http://www.hujianxiong.com/2016/09/02/install-docker-swarm-cluster/index.html">
 <meta property="og:site_name" content="@HJX - SRE">
-<meta property="og:description" content="环境配置 宿主机操作系统 CentOS Linux release 7.2.1511 (Core)   Docker版本 Server Version: 1.12.0   Swarm版本: Server Version: swarm/1.2.4   Consul版本: Consul v0.5.2   IP规划:  10.20.145.46 ~ 10.20.145.48    #Consul集群 1">
+<meta property="og:description" content="1.环境配置 宿主机操作系统 CentOS Linux release 7.2.1511 (Core)   Docker版本 Server Version: 1.12.0   Swarm版本: Server Version: swarm/1.2.4   Consul版本: Consul v0.5.2   IP规划:  10.20.145.46 ~ 10.20.145.48    #Consul集群">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-05-25T15:04:46.631Z">
+<meta property="og:updated_time" content="2018-05-26T16:34:48.962Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker Swarm 集群搭建">
-<meta name="twitter:description" content="环境配置 宿主机操作系统 CentOS Linux release 7.2.1511 (Core)   Docker版本 Server Version: 1.12.0   Swarm版本: Server Version: swarm/1.2.4   Consul版本: Consul v0.5.2   IP规划:  10.20.145.46 ~ 10.20.145.48    #Consul集群 1">
+<meta name="twitter:description" content="1.环境配置 宿主机操作系统 CentOS Linux release 7.2.1511 (Core)   Docker版本 Server Version: 1.12.0   Swarm版本: Server Version: swarm/1.2.4   Consul版本: Consul v0.5.2   IP规划:  10.20.145.46 ~ 10.20.145.48    #Consul集群">
 
 
 
@@ -429,7 +429,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,629
+                  1,632
                 </span>
               
 
@@ -466,7 +466,7 @@
       
 
       
-        <h2 id="环境配置"><a href="#环境配置" class="headerlink" title="环境配置"></a>环境配置</h2><ul>
+        <h2 id="1-环境配置"><a href="#1-环境配置" class="headerlink" title="1.环境配置"></a>1.环境配置</h2><ul>
 <li>宿主机操作系统<ul>
 <li><code>CentOS Linux release 7.2.1511 (Core)</code></li>
 </ul>
@@ -492,7 +492,7 @@
 <a id="more"></a>
 </li>
 </ul>
-<h2 id="集群所需要的组件"><a href="#集群所需要的组件" class="headerlink" title="集群所需要的组件"></a>集群所需要的组件</h2><blockquote>
+<h2 id="2-集群所需要的组件"><a href="#2-集群所需要的组件" class="headerlink" title="2.集群所需要的组件"></a>2.集群所需要的组件</h2><blockquote>
 <p>使用Shipyard Docker资源管理平台<br>参考:<a href="http://www.shipyard-project.com/docs/deploy/manual/" target="_blank" rel="noopener">http://www.shipyard-project.com/</a></p>
 </blockquote>
 <ul>
@@ -504,7 +504,7 @@
 <li>InfluxDB  &nbsp;  存储Cadvisor监控数据</li>
 <li>Grafana  &nbsp;  读取InfluxDB数据,显示监控图表</li>
 </ul>
-<h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><h3 id="1-测试环境关闭防火墙-Selinux"><a href="#1-测试环境关闭防火墙-Selinux" class="headerlink" title="1.测试环境关闭防火墙,Selinux"></a>1.测试环境关闭防火墙,Selinux</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@amumu ~]# systemctl stop firewalld</span><br><span class="line">[root@amumu ~]# systemctl disable firewalld</span><br><span class="line">[root@amumu ~]# sed -i &quot;s/enforcing/disabled/&quot; /etc/selinux/config</span><br><span class="line">[root@amumu ~]# sed -i &quot;s/enforcing/disabled/&quot; /etc/sysconfig/selinux</span><br></pre></td></tr></table></figure>
+<h2 id="3-部署"><a href="#3-部署" class="headerlink" title="3.部署"></a>3.部署</h2><h3 id="1-测试环境关闭防火墙-Selinux"><a href="#1-测试环境关闭防火墙-Selinux" class="headerlink" title="1.测试环境关闭防火墙,Selinux"></a>1.测试环境关闭防火墙,Selinux</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@amumu ~]# systemctl stop firewalld</span><br><span class="line">[root@amumu ~]# systemctl disable firewalld</span><br><span class="line">[root@amumu ~]# sed -i &quot;s/enforcing/disabled/&quot; /etc/selinux/config</span><br><span class="line">[root@amumu ~]# sed -i &quot;s/enforcing/disabled/&quot; /etc/sysconfig/selinux</span><br></pre></td></tr></table></figure>
 <h3 id="2-Docker安装"><a href="#2-Docker安装" class="headerlink" title="2.Docker安装"></a>2.Docker安装</h3><blockquote>
 <p>配置阿里Docker YUM源<br>说明:在所有IP节点上执行</p>
 </blockquote>
@@ -593,7 +593,7 @@
   <p><span>本文标题:</span><a href="/2016/09/02/install-docker-swarm-cluster/">Docker Swarm 集群搭建</a></p>
   <p><span>文章作者:</span><a href="/" title="访问 @HJX 的个人博客">@HJX</a></p>
   <p><span>发布时间:</span>2016年09月02日 - 23:09</p>
-  <p><span>最后更新:</span>2018年05月25日 - 23:05</p>
+  <p><span>最后更新:</span>2018年05月27日 - 00:05</p>
   <p><span>原始链接:</span><a href="/2016/09/02/install-docker-swarm-cluster/" title="Docker Swarm 集群搭建">http://www.hujianxiong.com/2016/09/02/install-docker-swarm-cluster/</a>
     <span class="copy-path"  title="点击复制文章链接"><i class="fa fa-clipboard" data-clipboard-text="http://www.hujianxiong.com/2016/09/02/install-docker-swarm-cluster/"  aria-label="复制成功！"></i></span>
   </p>
@@ -845,7 +845,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#环境配置"><span class="nav-text">环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集群所需要的组件"><span class="nav-text">集群所需要的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署"><span class="nav-text">部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-测试环境关闭防火墙-Selinux"><span class="nav-text">1.测试环境关闭防火墙,Selinux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Docker安装"><span class="nav-text">2.Docker安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Consul集群安装"><span class="nav-text">3.Consul集群安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Swarm集群和Shipyard-DockerUI资源管理平台安装"><span class="nav-text">4.Swarm集群和Shipyard DockerUI资源管理平台安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Docker监控-Cadvisor-Influxdb-Grafana"><span class="nav-text">5.Docker监控(Cadvisor+Influxdb+Grafana)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-使用Graylog2收集Docker日志"><span class="nav-text">6.使用Graylog2收集Docker日志</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-环境配置"><span class="nav-text">1.环境配置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-集群所需要的组件"><span class="nav-text">2.集群所需要的组件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-部署"><span class="nav-text">3.部署</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-测试环境关闭防火墙-Selinux"><span class="nav-text">1.测试环境关闭防火墙,Selinux</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Docker安装"><span class="nav-text">2.Docker安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Consul集群安装"><span class="nav-text">3.Consul集群安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Swarm集群和Shipyard-DockerUI资源管理平台安装"><span class="nav-text">4.Swarm集群和Shipyard DockerUI资源管理平台安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-Docker监控-Cadvisor-Influxdb-Grafana"><span class="nav-text">5.Docker监控(Cadvisor+Influxdb+Grafana)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-使用Graylog2收集Docker日志"><span class="nav-text">6.使用Graylog2收集Docker日志</span></a></li></ol></li></ol></div>
             
 
           </div>
