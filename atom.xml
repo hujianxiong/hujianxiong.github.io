@@ -65,9 +65,9 @@
     
       <category term="docker" scheme="http://www.hujianxiong.com/tags/docker/"/>
     
-      <category term="grafana" scheme="http://www.hujianxiong.com/tags/grafana/"/>
-    
       <category term="prometheus" scheme="http://www.hujianxiong.com/tags/prometheus/"/>
+    
+      <category term="grafana" scheme="http://www.hujianxiong.com/tags/grafana/"/>
     
       <category term="swarm mode" scheme="http://www.hujianxiong.com/tags/swarm-mode/"/>
     
@@ -166,11 +166,11 @@
     
       <category term="docker" scheme="http://www.hujianxiong.com/tags/docker/"/>
     
+      <category term="grafana" scheme="http://www.hujianxiong.com/tags/grafana/"/>
+    
       <category term="cadvisor" scheme="http://www.hujianxiong.com/tags/cadvisor/"/>
     
       <category term="influxdb" scheme="http://www.hujianxiong.com/tags/influxdb/"/>
-    
-      <category term="grafana" scheme="http://www.hujianxiong.com/tags/grafana/"/>
     
   </entry>
   
