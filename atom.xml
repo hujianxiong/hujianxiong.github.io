@@ -213,17 +213,23 @@
     <link href="http://www.hujianxiong.com/2016/09/06/installl-docker-compose/"/>
     <id>http://www.hujianxiong.com/2016/09/06/installl-docker-compose/</id>
     <published>2016-09-06T01:45:33.000Z</published>
-    <updated>2018-05-25T15:04:26.425Z</updated>
+    <updated>2018-05-26T15:23:36.418Z</updated>
     
-    <content type="html"><![CDATA[<blockquote><p>使用pip安装docker-compose</p></blockquote><h2 id="安装setuptools软件包："><a href="#安装setuptools软件包：" class="headerlink" title="安装setuptools软件包："></a>安装setuptools软件包：</h2><h4 id="下载"><a href="#下载" class="headerlink" title="下载:"></a>下载:</h4><pre><code>[root@amumu ~]# wget https://pypi.python.org/packages/32/3c/e853a68b703f347f5ed86585c2dd2828a83252e1216c1201fa6f81270578/setuptools-26.1.1.tar.gz#md5=0744ee90ad266fb117d59f94334185d0</code></pre><h4 id="解压"><a href="#解压" class="headerlink" title="解压:"></a>解压:</h4><pre><code>[root@amumu ~]# tar -zxvf setuptools-26.1.1.tar.gz    [root@amumu ~]# cd setuptools-26.1.1</code></pre><a id="more"></a><h4 id="编译"><a href="#编译" class="headerlink" title="编译:"></a>编译:</h4><pre><code>[root@amumu setuptools-26.1.1]# python setup.py buildrunning buildrunning build_py</code></pre><h4 id="安装"><a href="#安装" class="headerlink" title="安装:"></a>安装:</h4><pre><code>[root@amumu setuptools-26.1.1]# python setup.py install</code></pre><h2 id="安装pip"><a href="#安装pip" class="headerlink" title="安装pip"></a>安装pip</h2><h4 id="下载-1"><a href="#下载-1" class="headerlink" title="下载:"></a>下载:</h4><pre><code>[root@amumu ~]# wget https://pypi.python.org/packages/e7/a8/7556133689add8d1a54c0b14aeff0acb03c64707ce100ecd53934da1aa13/pip-8.1.2.tar.gz#md5=87083c0b9867963b29f7aba3613e8f4a</code></pre><h4 id="解压-1"><a href="#解压-1" class="headerlink" title="解压:"></a>解压:</h4><pre><code>[root@amumu ~]# tar -zxvf pip-8.1.2.tar.gz[root@amumu ~]# cd pip-8.1.2</code></pre><h4 id="安装-1"><a href="#安装-1" class="headerlink" title="安装:"></a>安装:</h4><pre><code>[root@amumu ~]# python setup.py  install</code></pre><h2 id="安装docker-compose"><a href="#安装docker-compose" class="headerlink" title="安装docker-compose"></a>安装docker-compose</h2><pre><code>[root@amumu ~]# pip install docker-compose</code></pre>]]></content>
+    <content type="html"><![CDATA[<blockquote><p>使用pip安装docker-compose</p></blockquote><h2 id="1-安装setuptools软件包"><a href="#1-安装setuptools软件包" class="headerlink" title="1.安装setuptools软件包"></a>1.安装setuptools软件包</h2><blockquote><p>下载:</p></blockquote><pre><code>[root@amumu ~]# wget https://pypi.python.org/packages/32/3c/e853a68b703f347f5ed86585c2dd2828a83252e1216c1201fa6f81270578/setuptools-26.1.1.tar.gz#md5=0744ee90ad266fb117d59f94334185d0</code></pre><blockquote><p> 解压:</p></blockquote><pre><code>[root@amumu ~]# tar -zxvf setuptools-26.1.1.tar.gz    [root@amumu ~]# cd setuptools-26.1.1</code></pre><a id="more"></a><blockquote><p>编译:</p></blockquote><pre><code>[root@amumu setuptools-26.1.1]# python setup.py buildrunning buildrunning build_py</code></pre><blockquote><p>安装:</p></blockquote><pre><code>[root@amumu setuptools-26.1.1]# python setup.py install</code></pre><h2 id="2-安装pip"><a href="#2-安装pip" class="headerlink" title="2.安装pip"></a>2.安装pip</h2><blockquote><p>下载:</p></blockquote><pre><code>[root@amumu ~]# wget https://pypi.python.org/packages/e7/a8/7556133689add8d1a54c0b14aeff0acb03c64707ce100ecd53934da1aa13/pip-8.1.2.tar.gz#md5=87083c0b9867963b29f7aba3613e8f4a</code></pre><blockquote><p>解压:</p></blockquote><pre><code>[root@amumu ~]# tar -zxvf pip-8.1.2.tar.gz[root@amumu ~]# cd pip-8.1.2</code></pre><blockquote><p>安装:</p></blockquote><pre><code>[root@amumu ~]# python setup.py  install</code></pre><h2 id="3-安装docker-compose"><a href="#3-安装docker-compose" class="headerlink" title="3.安装docker-compose"></a>3.安装docker-compose</h2><pre><code>[root@amumu ~]# pip install docker-compose</code></pre>]]></content>
     
     <summary type="html">
     
       &lt;blockquote&gt;
 &lt;p&gt;使用pip安装docker-compose&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;h2 id=&quot;安装setuptools软件包：&quot;&gt;&lt;a href=&quot;#安装setuptools软件包：&quot; class=&quot;headerlink&quot; title=&quot;安装setuptools软件包：&quot;&gt;&lt;/a&gt;安装setuptools软件包：&lt;/h2&gt;&lt;h4 id=&quot;下载&quot;&gt;&lt;a href=&quot;#下载&quot; class=&quot;headerlink&quot; title=&quot;下载:&quot;&gt;&lt;/a&gt;下载:&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;[root@amumu ~]# wget https://pypi.python.org/packages/32/3c/e853a68b703f347f5ed86585c2dd2828a83252e1216c1201fa6f81270578/setuptools-26.1.1.tar.gz#md5=0744ee90ad266fb117d59f94334185d0
-&lt;/code&gt;&lt;/pre&gt;&lt;h4 id=&quot;解压&quot;&gt;&lt;a href=&quot;#解压&quot; class=&quot;headerlink&quot; title=&quot;解压:&quot;&gt;&lt;/a&gt;解压:&lt;/h4&gt;&lt;pre&gt;&lt;code&gt;[root@amumu ~]# tar -zxvf setuptools-26.1.1.tar.gz    
+&lt;h2 id=&quot;1-安装setuptools软件包&quot;&gt;&lt;a href=&quot;#1-安装setuptools软件包&quot; class=&quot;headerlink&quot; title=&quot;1.安装setuptools软件包&quot;&gt;&lt;/a&gt;1.安装setuptools软件包&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;下载:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;[root@amumu ~]# wget https://pypi.python.org/packages/32/3c/e853a68b703f347f5ed86585c2dd2828a83252e1216c1201fa6f81270578/setuptools-26.1.1.tar.gz#md5=0744ee90ad266fb117d59f94334185d0
+&lt;/code&gt;&lt;/pre&gt;&lt;blockquote&gt;
+&lt;p&gt; 解压:&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;pre&gt;&lt;code&gt;[root@amumu ~]# tar -zxvf setuptools-26.1.1.tar.gz    
 [root@amumu ~]# cd setuptools-26.1.1
 &lt;/code&gt;&lt;/pre&gt;
     

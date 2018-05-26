@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.hujianxiong.com/2016/09/06/installl-docker-compose/</loc>
+    
+    <lastmod>2018-05-26T15:23:36.418Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.hujianxiong.com/2017/03/21/install-docker-swarm-calico/</loc>
     
     <lastmod>2018-05-25T15:05:12.370Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>http://www.hujianxiong.com/2016/09/02/install-docker-swarm-cluster/</loc>
     
     <lastmod>2018-05-25T15:04:46.631Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://www.hujianxiong.com/2016/09/06/installl-docker-compose/</loc>
-    
-    <lastmod>2018-05-25T15:04:26.425Z</lastmod>
     
   </url>
   
